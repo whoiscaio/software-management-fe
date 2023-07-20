@@ -18,17 +18,21 @@ export default function useFormErrors() {
     ]);
   }
 
+  function cleanAllErrors() {
+    setErrors([]);
+  }
+
   function cleanErrors(field: string) {
     setErrors((prevState) => prevState.filter((error) => error.field !== field));
   }
 
   function getErrors(field: string) {
-    return errors.filter((error) => error.field === field);
+    return errors.find((error) => error.field === field);
   }
 
   return {
-    errors,
     setError,
-    getErrors
+    getErrors,
+    cleanAllErrors
   };
 }
