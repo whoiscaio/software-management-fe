@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import AuthContainer from './styles';
 import Field from './components/Field';
 
