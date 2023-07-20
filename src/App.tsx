@@ -1,7 +1,9 @@
+import Router from './global/components/Router';
+
 function App() {
   return (
     <>
-      Software development system
+      <Router />
     </>
   );
 }
