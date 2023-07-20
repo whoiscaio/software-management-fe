@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 type PageContainerProps = {
-  verticalAlign?: 'center';
+  $verticalAlign?: 'center';
 };
 
 const PageContainer = styled.main<PageContainerProps>`
@@ -10,7 +10,7 @@ const PageContainer = styled.main<PageContainerProps>`
   display: flex;
   justify-content: center;
 
-  align-items: ${({ verticalAlign }) => verticalAlign || 'initial'};
+  align-items: ${({ $verticalAlign }) => $verticalAlign || 'initial'};
 `;
 
 export default PageContainer;
