@@ -6,6 +6,7 @@ const mainTheme = {
     white: '#FFFEF7',
     darkLine: '#0E0E0E',
     lightLine: '#F2F2E7',
+    error: '#ff4941',
   },
   shadow: '0 5px 10px 0px rgba(0,0,0,0.18)'
 };
