@@ -1,3 +1,4 @@
+import Footer from './global/components/Footer';
 import Header from './global/components/Header';
 import Root from './global/components/Root';
 import Router from './global/components/Router';
@@ -9,7 +10,7 @@ function App() {
       <div className="content-wrapper">
         <Router />
       </div>
-      <div className="footer" /* to be implemented */ />
+      <Footer />
     </Root>
   );
 }
