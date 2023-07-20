@@ -20,7 +20,7 @@ export default function Auth({ as }: AuthProps) {
   }
 
   return (
-    <Page>
+    <Page verticalAlign='center'>
       <AuthContainer>
         <form>
           <div className="fields">
