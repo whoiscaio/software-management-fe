@@ -5,9 +5,7 @@ import Router from './global/components/Router';
 function App() {
   return (
     <Root>
-      <Page>
-        <Router />
-      </Page>
+      <Router />
     </Root>
   );
 }
