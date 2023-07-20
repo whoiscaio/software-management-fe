@@ -8,7 +8,9 @@ type PageProps = {
 export default function Page({ children }: PageProps) {
   return (
     <PageContainer>
-      {children}
+      <div className="app-context">
+        {children}
+      </div>
     </PageContainer>
   );
 }

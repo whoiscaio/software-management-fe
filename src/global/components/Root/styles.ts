@@ -7,8 +7,11 @@ const RootContainer = styled.div`
   height: 100vh;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+
+  .content-wrapper {
+    flex: 1;
+  }
 `;
 
 export default RootContainer;

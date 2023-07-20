@@ -4,20 +4,24 @@ import { IAccount } from '../types/accountTypes';
 interface AuthContextData {
   jwt: string;
   account: IAccount;
+  isAuthenticated: boolean;
 }
 
 export const AuthContext = createContext<AuthContextData>({
   jwt: '',
-  account: {} as IAccount
+  account: {} as IAccount,
+  isAuthenticated: false
 });
 
 export default function AuthContextProvider({ children }: { children: ReactNode; }) {
-  const [account, setAccount] = useState<IAccount>({} as IAccount);
-  const [jwt, setJwt] = useState<string>('');
+  const [account] = useState<IAccount>({} as IAccount);
+  const [jwt] = useState<string>('');
+  const [isAuthenticated] = useState<boolean>(false);
 
   const contextValue: AuthContextData = {
     jwt,
-    account
+    account,
+    isAuthenticated
   };
 
   return (

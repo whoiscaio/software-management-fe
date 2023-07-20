@@ -15,8 +15,7 @@ export default function Field({ label, value, type, setValue }: FieldProps) {
 
   return (
     <FieldContainer>
-      <p>{label}</p>
-      <input value={value} onChange={handleChangeValue} type={type || 'text'} />
+      <input value={value} onChange={handleChangeValue} type={type || 'text'} placeholder={label} />
     </FieldContainer>
   );
 }

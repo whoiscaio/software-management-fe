@@ -31,6 +31,38 @@ const GlobalStyles = createGlobalStyle`
 
     cursor: pointer;
   }
+
+  a {
+    all: unset;
+
+    cursor: pointer;
+  }
+
+  .app-context {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  input {
+    border: 0;
+  }
+
+  p,
+  span,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  button,
+  input,
+  a {
+    color: ${({ theme }) => theme.colors.white};
+  }
+
+  input::placeholder {
+    color: ${({ theme }) => theme.colors.white}88;
+  }
 `;
 
 export default GlobalStyles;

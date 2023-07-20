@@ -22,8 +22,6 @@ export default function Auth({ as }: AuthProps) {
   return (
     <Page>
       <AuthContainer>
-        <h1>Bem-vindo!</h1>
-
         <form>
           <div className="fields">
             <Field value={username} setValue={setUsername} label="Usuário" />
@@ -35,14 +33,22 @@ export default function Auth({ as }: AuthProps) {
             }
           </div>
           <div className="actions">
-            <div>
+            <button type="button" className="connect-button" onClick={handleLogin}>{as === 'login' ? 'CONECTAR' : 'CADASTRAR'}</button>
+            <div className="signup-button-wrapper">
               {
-                as === 'login' && (
-                  <button type="button" className="signup-button" onClick={() => navigate('/signup')}>Não possui conta?</button>
+                as === 'login' ? (
+                  <>
+                    <p>Não é registrado?</p>
+                    <button type="button" className="signup-button" onClick={() => navigate('/signup')}>Crie uma conta</button>
+                  </>
+                ) : (
+                  <>
+                    <p>Já é registrado?</p>
+                    <button type="button" className="signup-button" onClick={() => navigate('/login')}>Conectar-se</button>
+                  </>
                 )
               }
             </div>
-            <button type="button" className="connect-button" onClick={handleLogin}>{as === 'login' ? 'Conectar' : 'Cadastrar'}</button>
           </div>
         </form>
       </AuthContainer>
