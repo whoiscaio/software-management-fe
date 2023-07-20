@@ -1,23 +1,16 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Auth from '../../pages/auth';
-import { useContext, useEffect } from 'react';
-import { AuthContext } from '../../contexts/authContext';
+import AuthGuard from './AuthGuard';
 
 export default function Router() {
-  const { jwt } = useContext(AuthContext);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!jwt) {
-      navigate('/login');
-    }
-  }, [jwt, navigate]);
-
   return (
     <Routes>
       <Route path="/login" element={<Auth as="login" />} />
       <Route path="/signup" element={<Auth as="signup" />} />
+      
+      <Route element={<AuthGuard />}>
+        <Route path="/" element={<h1>Home</h1>} />
+      </Route>
     </Routes>
   );
 }
