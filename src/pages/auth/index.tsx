@@ -15,7 +15,7 @@ export default function Auth({ as }: AuthProps) {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const navigate = useNavigate();
-  const { getErrors, setError, cleanAllErrors } = useFormErrors();
+  const { getErrors, setError, cleanErrorsByFieldname, cleanAllErrors } = useFormErrors();
 
   function handleNavigate(path: string) {
     cleanAllErrors();
@@ -23,36 +23,49 @@ export default function Auth({ as }: AuthProps) {
     navigate(path);
   }
 
-  function validateFields(): boolean {
-    let isThereAnError = false;
-
+  function validateUsername() {
     if (!username) {
       setError('username', 'O campo usuário é obrigatório.');
-      isThereAnError = true;
-    }
-
-    if (!password) {
-      setError('password', 'O campo senha é obrigatório.');
-      isThereAnError = true;
-    }
-
-    if (as === 'signup') {
-      if (!confirmPassword) {
-        setError('confirmPassword', 'O campo de confirmação é obrigatório.');
-        isThereAnError = true;
-      }
-
-      if (confirmPassword !== password) {
-        setError('confirmPassword', 'As senhas inseridas são diferentes.');
-        isThereAnError = true;
-      }
-    }
-
-    if (isThereAnError) {
       return false;
     }
 
+    cleanErrorsByFieldname('username');
     return true;
+  }
+
+  function validatePassword() {
+    if (!password) {
+      setError('password', 'O campo senha é obrigatório.');
+      return false;
+    }
+
+    cleanErrorsByFieldname('password');
+    return true;
+  }
+
+  function validateConfirmPassword() {
+    if (as === 'signup') {
+      if (!confirmPassword) {
+        setError('confirmPassword', 'O campo de confirmação é obrigatório.');
+        return false;
+      }
+
+      if (confirmPassword !== password) {
+        setError('confirmPassword', 'As senhas se diferem.');
+        return false;
+      }
+    }
+
+    cleanErrorsByFieldname('confirmPassword');
+    return true;
+  }
+
+  function validateFields() {
+    const isUserValid = validateUsername();
+    const isPasswordValid = validatePassword();
+    const isConfirmPasswordValid = validateConfirmPassword();
+
+    return (isUserValid && isPasswordValid && isConfirmPasswordValid);
   }
 
   function handleSubmit(e: FormEvent) {
@@ -60,10 +73,10 @@ export default function Auth({ as }: AuthProps) {
 
     if (!validateFields()) return;
 
-    handleLogin();
+    handleFormAction();
   }
 
-  function handleLogin() {
+  function handleFormAction() {
     console.log('login action');
   }
 
@@ -86,7 +99,7 @@ export default function Auth({ as }: AuthProps) {
             }
           </div>
           <div className="actions">
-            <button type="submit" className="connect-button" onClick={handleLogin}>{as === 'login' ? 'CONECTAR' : 'CADASTRAR'}</button>
+            <button type="submit" className="connect-button">{as === 'login' ? 'CONECTAR' : 'CADASTRAR'}</button>
             <div className="signup-button-wrapper">
               {
                 as === 'login' ? (

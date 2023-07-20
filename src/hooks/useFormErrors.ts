@@ -7,7 +7,7 @@ export default function useFormErrors() {
   function setError(field: string, message: string) {
     if (errors.find((error) => error.field === field && error.message === message)) return;
 
-    cleanErrors(field);
+    cleanErrorsByFieldname(field);
 
     setErrors((prevState) => [
       ...prevState,
@@ -22,7 +22,7 @@ export default function useFormErrors() {
     setErrors([]);
   }
 
-  function cleanErrors(field: string) {
+  function cleanErrorsByFieldname(field: string) {
     setErrors((prevState) => prevState.filter((error) => error.field !== field));
   }
 
@@ -33,6 +33,7 @@ export default function useFormErrors() {
   return {
     setError,
     getErrors,
+    cleanErrorsByFieldname,
     cleanAllErrors
   };
 }
