@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Lato, Arial, Helvetica, sans-serif;
     font-size: 16px;
   }
 
