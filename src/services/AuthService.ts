@@ -1,7 +1,7 @@
-import { AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 import AuthDTO from './dtos/AuthDTO';
 import { HttpClient } from './utils/HttpClient';
-import { ITokenResponse } from '../types/accountTypes';
+import { toast } from 'react-toastify';
 
 class AuthService {
   private httpClient: HttpClient;
@@ -11,13 +11,23 @@ class AuthService {
   }
 
   async login(authDTO: AuthDTO) {
-    const response = await this.httpClient.post('/login', authDTO) as AxiosResponse<ITokenResponse>;
+    const response = await this.httpClient.post('/login', authDTO);
+
+    if (response instanceof AxiosError) {
+      toast.error(response.response?.data.message);
+      return;
+    }
 
     return response;
   }
 
   async signup(authDTO: AuthDTO) {
     const response = await this.httpClient.post('/signup', authDTO);
+
+    if (response instanceof AxiosError) {
+      toast.error(response.response?.data.message);
+      return;
+    }
 
     return response;
   }

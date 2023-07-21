@@ -94,17 +94,23 @@ export default function Auth({ as }: AuthProps) {
         password
       });
 
-      authenticate(response.data.token);
+      if (response) {
+        authenticate(response.data.token);
+      }
+
       return;
     }
 
-    await AuthService.signup({
+    const response = await AuthService.signup({
       username,
       password
     });
 
-    resetState();
-    navigate('/login');
+    if (response) {
+      resetState();
+      navigate('/login');
+    }
+
     return;
   }
 
@@ -124,6 +130,7 @@ export default function Auth({ as }: AuthProps) {
             {
               as === 'signup' && (
                 <Field
+                  type="password"
                   value={confirmPassword}
                   setValue={setConfirmPassword}
                   label="Confirmar senha"

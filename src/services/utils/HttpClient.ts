@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { IApiError } from '../../types/apiError';
 
 export class HttpClient {
   private baseURL: string;
@@ -8,18 +9,22 @@ export class HttpClient {
   }
 
   async get(uri: string) {
-    if (!uri) return;
+    try {
+      const response = await axios(`${this.baseURL}${uri}`);
 
-    const response = await axios(`${this.baseURL}${uri}`);
-
-    return response;
+      return response;
+    } catch (error) {
+      return error as AxiosError<IApiError>;
+    }
   }
 
   async post(uri: string, body: any) {
-    if (!uri) return;
+    try {
+      const response = await axios.post(`${this.baseURL}${uri}`, body);
 
-    const response = await axios.post(`${this.baseURL}${uri}`, body);
-
-    return response;
+      return response;
+    } catch (error) {
+      return error as AxiosError<IApiError>;
+    }
   }
 }
