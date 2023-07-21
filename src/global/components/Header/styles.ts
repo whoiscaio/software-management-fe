@@ -22,8 +22,24 @@ const HeaderContainer = styled.header`
   .user {
     display: flex;
     align-items: center;
+  }
 
-    gap: .6rem;
+  .actions {
+    display: flex;
+    align-items: center;
+
+    gap: 2rem;
+
+    button {
+      display: flex;
+    }
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+
+    gap: .4rem;
   }
 `;
 

@@ -9,6 +9,7 @@ interface AuthContextData {
   account: IAccount;
   isAuthenticated: boolean;
   authenticate: (user: IAccount) => void;
+  logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextData>({
@@ -16,6 +17,7 @@ export const AuthContext = createContext<AuthContextData>({
   account: {} as IAccount,
   isAuthenticated: false,
   authenticate: () => { },
+  logout: () => { },
 });
 
 export default function AuthContextProvider({ children }: { children: ReactNode; }) {
@@ -29,11 +31,18 @@ export default function AuthContextProvider({ children }: { children: ReactNode;
     setIsAuthenticated(true);
   }
 
+  function logout() {
+    setAccount({} as IAccount);
+    setToken('');
+    setIsAuthenticated(false);
+  }
+
   const contextValue: AuthContextData = {
     token,
     account,
     isAuthenticated,
-    authenticate
+    authenticate,
+    logout
   };
 
   return (
