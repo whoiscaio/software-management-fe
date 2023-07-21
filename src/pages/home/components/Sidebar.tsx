@@ -1,4 +1,3 @@
-import { ChevronLeft } from 'lucide-react';
 import { SidebarContainer } from '../styles';
 import { useContext } from 'react';
 import { TeamContext } from '../../../contexts/TeamContext';
