@@ -98,7 +98,7 @@ export default function Auth({ as }: AuthProps) {
       return;
     }
 
-    const response = await AuthService.signup({
+    await AuthService.signup({
       username,
       password
     });
@@ -109,8 +109,6 @@ export default function Auth({ as }: AuthProps) {
   }
 
   useEffect(() => {
-    console.log(isAuthenticated);
-
     if (isAuthenticated) {
       navigate('/');
     }

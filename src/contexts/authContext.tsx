@@ -3,7 +3,7 @@
 import { ReactNode, createContext, useState } from 'react';
 import jwt from 'jwt-decode';
 
-import { IAccount, ITokenResponse } from '../types/accountTypes';
+import { IAccount } from '../types/accountTypes';
 
 interface AuthContextData {
   token: string;
