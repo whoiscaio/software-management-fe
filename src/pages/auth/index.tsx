@@ -6,6 +6,8 @@ import Page from '../../global/components/Page';
 import useFormErrors from '../../hooks/useFormErrors';
 import AuthService from '../../services/AuthService';
 import { AuthContext } from '../../contexts/AuthContext';
+import { TeamContext } from '../../contexts/TeamContext';
+import decode from '../../global/utils/decode';
 
 type AuthProps = {
   as: 'login' | 'signup';
@@ -13,6 +15,7 @@ type AuthProps = {
 
 export default function Auth({ as }: AuthProps) {
   const { isAuthenticated, authenticate } = useContext(AuthContext);
+  const { handleSetTeams } = useContext(TeamContext);
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -95,7 +98,10 @@ export default function Auth({ as }: AuthProps) {
       });
 
       if (response) {
-        authenticate(response.data.token);
+        const { user } = decode(response.data.token);
+
+        authenticate(user);
+        handleSetTeams(user.teams);
       }
 
       return;

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
 import { ReactNode, createContext, useState } from 'react';
-import jwt from 'jwt-decode';
 
 import { IAccount } from '../types/accountTypes';
 
@@ -9,7 +8,7 @@ interface AuthContextData {
   token: string;
   account: IAccount;
   isAuthenticated: boolean;
-  authenticate: (token: string) => void;
+  authenticate: (user: IAccount) => void;
 }
 
 export const AuthContext = createContext<AuthContextData>({
@@ -24,9 +23,7 @@ export default function AuthContextProvider({ children }: { children: ReactNode;
   const [token, setToken] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
-  function authenticate(token: string) {
-    const { user }: { user: IAccount; } = jwt(token);
-
+  function authenticate(user: IAccount) {
     setAccount(user);
     setToken(token);
     setIsAuthenticated(true);

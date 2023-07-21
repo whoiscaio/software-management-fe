@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import AuthDTO from './dtos/AuthDTO';
 import { HttpClient } from './utils/HttpClient';
-import handleEmitError from './utils/handleEmitError';
+import handleEmitError from '../global/utils/handleEmitError';
 
 class AuthService {
   private httpClient: HttpClient;
