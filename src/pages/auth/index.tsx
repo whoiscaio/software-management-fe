@@ -4,6 +4,7 @@ import Field from './components/Field';
 import { useNavigate } from 'react-router-dom';
 import Page from '../../global/components/Page';
 import useFormErrors from '../../hooks/useFormErrors';
+import AuthService from '../../services/AuthService';
 
 type AuthProps = {
   as: 'login' | 'signup';
@@ -17,8 +18,15 @@ export default function Auth({ as }: AuthProps) {
   const navigate = useNavigate();
   const { getErrors, setError, cleanErrorsByFieldname, cleanAllErrors } = useFormErrors();
 
+  function resetState() {
+    setUsername('');
+    setPassword('');
+    setConfirmPassword('');
+  }
+
   function handleNavigate(path: string) {
     cleanAllErrors();
+    resetState();
 
     navigate(path);
   }
@@ -76,8 +84,21 @@ export default function Auth({ as }: AuthProps) {
     handleFormAction();
   }
 
-  function handleFormAction() {
-    console.log('login action');
+  async function handleFormAction() {
+    const response = await AuthService[as]({
+      username,
+      password
+    });
+
+    if (as === 'signup') {
+      resetState();
+      navigate('/login');
+      return;
+    }
+
+    
+
+    console.log(response);
   }
 
   return (

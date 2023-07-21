@@ -5,3 +5,7 @@ export interface IAccount {
   username: string,
   teams: ITeam[];
 }
+
+export interface ITokenResponse {
+  token: string;
+}
