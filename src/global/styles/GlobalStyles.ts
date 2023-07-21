@@ -41,19 +41,6 @@ const GlobalStyles = createGlobalStyle`
   h2,
   h3,
   h4,
-  h5,
-  button,
-  input,
-  a {
-    color: ${({ theme }) => theme.colors.white};
-  }
-
-  p,
-  span,
-  h1,
-  h2,
-  h3,
-  h4,
   h5 {
     cursor: default;
   }
@@ -70,6 +57,19 @@ const GlobalStyles = createGlobalStyle`
     &, * {
       cursor: pointer;
     }
+  }
+
+  p,
+  span,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  button,
+  input,
+  a {
+    color: ${({ theme }) => theme.colors.white};
   }
 
   input::placeholder {
