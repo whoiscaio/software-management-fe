@@ -1,15 +1,13 @@
-import { useContext } from 'react';
 import Page from '../../global/components/Page';
-import { TeamContext } from '../../contexts/TeamContext';
+import HomePageContainer from './styles';
+import Sidebar from './components/Sidebar';
 
 export default function Home() {
-  const { teams } = useContext(TeamContext);
-
-  console.log(teams);
-
   return (
     <Page>
-      Home
+      <HomePageContainer>
+        <Sidebar />
+      </HomePageContainer>
     </Page>
-  )
+  );
 }

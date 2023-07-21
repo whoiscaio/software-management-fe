@@ -48,7 +48,9 @@ const GlobalStyles = createGlobalStyle`
   button {
     all: unset;
 
-    cursor: pointer;
+    &, * {
+      cursor: pointer;
+    }
   }
 
   a {
@@ -74,6 +76,19 @@ const GlobalStyles = createGlobalStyle`
 
   input::placeholder {
     color: ${({ theme }) => theme.colors.white}88;
+  }
+
+  .contrast-button {
+    background: ${({ theme }) => theme.colors.secondary};
+    border-radius: .2rem;
+  }
+
+  .scale-down-hover-effect {
+    transition: transform .12s ease;
+
+    &:hover {
+      transform: scale(.97);
+    }
   }
 `;
 

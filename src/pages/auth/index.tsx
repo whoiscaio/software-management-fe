@@ -146,7 +146,7 @@ export default function Auth({ as }: AuthProps) {
             }
           </div>
           <div className="actions">
-            <button type="submit" className="connect-button">{as === 'login' ? 'CONECTAR' : 'CADASTRAR'}</button>
+            <button type="submit" className="connect-button contrast-button scale-down-hover-effect">{as === 'login' ? 'CONECTAR' : 'CADASTRAR'}</button>
             <div className="signup-button-wrapper">
               {
                 as === 'login' ? (

@@ -3,6 +3,7 @@ const mainTheme = {
     main: '#14213D',
     lightMain: '#485570',
     secondary: '#FCA311',
+    darkSecondary: '#BA780E',
     white: '#FFFEF7',
     darkLine: '#0E0E0E',
     lightLine: '#F2F2E7',

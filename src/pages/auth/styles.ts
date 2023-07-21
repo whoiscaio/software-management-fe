@@ -37,20 +37,11 @@ const AuthContainer = styled.section`
     gap: 1rem;
 
     .connect-button {
-      background: ${({ theme }) => theme.colors.secondary};
-      border-radius: .2rem;
-      
       padding: 1rem;
       font-size: 1.2rem;
       font-weight: 700;
 
       text-align: center;
-
-      transition: transform .12s ease;
-
-      &:hover {
-        transform: scale(.97);
-      }
     }
 
     .signup-button-wrapper {
