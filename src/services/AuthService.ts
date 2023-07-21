@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import AuthDTO from './dtos/AuthDTO';
 import { HttpClient } from './utils/HttpClient';
-import { toast } from 'react-toastify';
+import handleEmitError from './utils/handleEmitError';
 
 class AuthService {
   private httpClient: HttpClient;
@@ -14,7 +14,7 @@ class AuthService {
     const response = await this.httpClient.post('/login', authDTO);
 
     if (response instanceof AxiosError) {
-      toast.error(response.response?.data.message);
+      handleEmitError(response.response?.data.message);
       return;
     }
 
@@ -25,7 +25,7 @@ class AuthService {
     const response = await this.httpClient.post('/signup', authDTO);
 
     if (response instanceof AxiosError) {
-      toast.error(response.response?.data.message);
+      handleEmitError(response.response?.data.message);
       return;
     }
 
