@@ -6,7 +6,7 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: center;
 
-  padding: 1rem 4rem;
+  padding: 1rem 0;
 
   h2 {
     color: ${({ theme }) => theme.colors.white};

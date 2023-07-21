@@ -27,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .app-context {
-    width: 100%;
+    width: 94%;
     max-width: 1200px;
   }
 
