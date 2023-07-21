@@ -1,27 +1,42 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 import { ReactNode, createContext, useState } from 'react';
-import { IAccount } from '../types/accountTypes';
+import jwt from 'jwt-decode';
+
+import { IAccount, ITokenResponse } from '../types/accountTypes';
 
 interface AuthContextData {
-  jwt: string;
+  token: string;
   account: IAccount;
   isAuthenticated: boolean;
+  authenticate: (token: string) => void;
 }
 
 export const AuthContext = createContext<AuthContextData>({
-  jwt: '',
+  token: '',
   account: {} as IAccount,
-  isAuthenticated: false
+  isAuthenticated: false,
+  authenticate: () => { },
 });
 
 export default function AuthContextProvider({ children }: { children: ReactNode; }) {
-  const [account] = useState<IAccount>({} as IAccount);
-  const [jwt] = useState<string>('');
-  const [isAuthenticated] = useState<boolean>(false);
+  const [account, setAccount] = useState<IAccount>({} as IAccount);
+  const [token, setToken] = useState<string>('');
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  function authenticate(token: string) {
+    const { user }: { user: IAccount; } = jwt(token);
+
+    setAccount(user);
+    setToken(token);
+    setIsAuthenticated(true);
+  }
 
   const contextValue: AuthContextData = {
-    jwt,
+    token,
     account,
-    isAuthenticated
+    isAuthenticated,
+    authenticate
   };
 
   return (

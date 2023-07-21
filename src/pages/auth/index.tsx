@@ -1,16 +1,19 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 import AuthContainer from './styles';
 import Field from './components/Field';
 import { useNavigate } from 'react-router-dom';
 import Page from '../../global/components/Page';
 import useFormErrors from '../../hooks/useFormErrors';
 import AuthService from '../../services/AuthService';
+import { AuthContext } from '../../contexts/authContext';
 
 type AuthProps = {
   as: 'login' | 'signup';
 };
 
 export default function Auth({ as }: AuthProps) {
+  const { isAuthenticated, authenticate } = useContext(AuthContext);
+
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -85,21 +88,33 @@ export default function Auth({ as }: AuthProps) {
   }
 
   async function handleFormAction() {
-    const response = await AuthService[as]({
+    if (as === 'login') {
+      const response = await AuthService.login({
+        username,
+        password
+      });
+
+      authenticate(response.data.token);
+      return;
+    }
+
+    const response = await AuthService.signup({
       username,
       password
     });
 
-    if (as === 'signup') {
-      resetState();
-      navigate('/login');
-      return;
-    }
-
-    
-
-    console.log(response);
+    resetState();
+    navigate('/login');
+    return;
   }
+
+  useEffect(() => {
+    console.log(isAuthenticated);
+
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <Page verticalAlign='center'>
