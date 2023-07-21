@@ -38,7 +38,7 @@ const AuthContainer = styled.section`
 
     .connect-button {
       background: ${({ theme }) => theme.colors.secondary};
-
+      border-radius: .2rem;
       
       padding: 1rem;
       font-size: 1.2rem;
