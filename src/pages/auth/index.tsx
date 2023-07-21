@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Page from '../../global/components/Page';
 import useFormErrors from '../../hooks/useFormErrors';
 import AuthService from '../../services/AuthService';
-import { AuthContext } from '../../contexts/authContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 type AuthProps = {
   as: 'login' | 'signup';
