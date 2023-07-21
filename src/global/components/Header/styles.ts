@@ -18,6 +18,13 @@ const HeaderContainer = styled.header`
 
     justify-content: space-between;
   }
+
+  .user {
+    display: flex;
+    align-items: center;
+
+    gap: .6rem;
+  }
 `;
 
 export default HeaderContainer;

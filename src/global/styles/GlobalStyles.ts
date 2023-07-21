@@ -26,18 +26,6 @@ const GlobalStyles = createGlobalStyle`
     outline: none;
   }
 
-  button {
-    all: unset;
-
-    cursor: pointer;
-  }
-
-  a {
-    all: unset;
-
-    cursor: pointer;
-  }
-
   .app-context {
     width: 100%;
     max-width: 1200px;
@@ -58,6 +46,30 @@ const GlobalStyles = createGlobalStyle`
   input,
   a {
     color: ${({ theme }) => theme.colors.white};
+  }
+
+  p,
+  span,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    cursor: default;
+  }
+
+  button {
+    all: unset;
+
+    cursor: pointer;
+  }
+
+  a {
+    all: unset;
+
+    &, * {
+      cursor: pointer;
+    }
   }
 
   input::placeholder {
