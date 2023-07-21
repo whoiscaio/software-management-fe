@@ -22,6 +22,8 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
   const [selectedTeam, setSelectedTeam] = useState<ITeam>({} as ITeam);
 
   function handleSetTeams(teams: ITeam[]) {
+    if (teams.length < 1) return;
+
     setTeams(teams);
   }
 
