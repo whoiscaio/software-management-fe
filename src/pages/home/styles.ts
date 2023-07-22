@@ -14,6 +14,10 @@ const HomePageContainer = styled.section`
 
     display: flex;
     flex-direction: column;
+
+    h1, h2, h3, h4, p {
+      color: ${({ theme }) => theme.colors.black};
+    }
   }
 `;
 
@@ -67,10 +71,6 @@ export const HomeHeaderContainer = styled.header`
     font-size: 2rem;
   }
 
-  h1, h2, p {
-    color: ${({ theme }) => theme.colors.black};
-  }
-
   .workspaces-list {
     display: flex;
     justify-content: center;
@@ -78,5 +78,42 @@ export const HomeHeaderContainer = styled.header`
     gap: 1.4rem;
   }
 `;
+
+export const PhaseListContainer = styled.div`
+  flex: 1;
+
+  display: flex;
+  gap: 1rem;
+
+  padding: 0 1rem 1rem;
+
+  overflow: auto;
+
+  .phase-column {
+    flex: 1;
+
+    border-radius: .6rem;
+
+    min-width: 180px;
+    max-width: 200px;
+
+    box-shadow: ${({ theme }) => theme.smallShadow};
+
+    header {
+      background: ${({ theme }) => theme.colors.main};
+
+      border-top-right-radius: .6rem;
+      border-top-left-radius: .6rem;
+
+      text-align: center;
+
+      padding: .6rem;
+      
+      h3 {
+        color: ${({ theme }) => theme.colors.white};
+      }
+    }
+  }
+`
 
 export default HomePageContainer;

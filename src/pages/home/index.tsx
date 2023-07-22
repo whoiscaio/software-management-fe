@@ -5,10 +5,11 @@ import HomeHeader from './components/HomeHeader';
 import { useContext, useEffect } from 'react';
 import { TeamContext } from '../../contexts/TeamContext';
 import { WorkspaceContext } from '../../contexts/WorkspaceContext';
+import PhaseList from './components/PhaseList';
 
 export default function Home() {
   const { selectedTeam } = useContext(TeamContext);
-  const { handleSetWorkspaces } = useContext(WorkspaceContext);
+  const { selectedWorkspace, handleSetWorkspaces } = useContext(WorkspaceContext);
 
   useEffect(() => {
     if (!selectedTeam) return;
@@ -25,7 +26,11 @@ export default function Home() {
             selectedTeam?.name ? (
               <>
                 <HomeHeader />
-                <div className="phase-listing">Phase list</div>
+                {
+                  selectedWorkspace?.name ? (
+                    <PhaseList />
+                  ) : <div>Nenhum workspace foi selecionado</div>
+                }
               </>
             ) : (
               <div>Nenhum time foi selecionado</div>

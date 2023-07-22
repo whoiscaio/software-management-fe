@@ -1,3 +1,4 @@
+import { IPhase } from './mainTypes';
 import { ISimpleTeam } from './teamTypes';
 
 export interface ISimpleWorkspace {
@@ -8,4 +9,5 @@ export interface ISimpleWorkspace {
 
 export interface IWorkspace extends ISimpleWorkspace {
   team: ISimpleTeam;
+  phases: IPhase[];
 }
