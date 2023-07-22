@@ -1,41 +1,50 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { ReactNode, createContext, useState } from 'react';
-import { ITeam } from '../types/teamTypes';
+import { ITeam, IUserTeam } from '../types/teamTypes';
 import { toast } from 'react-toastify';
+import TeamService from '../services/TeamService';
 
 interface TeamContextData {
-  teams: ITeam[];
-  handleSetTeams: (teams: ITeam[]) => void;
+  teams: IUserTeam[];
+  handleSetTeams: (teams: IUserTeam[]) => void;
   selectedTeam: ITeam;
-  selectTeam: (team_id: string) => void;
+  selectTeam: (teamId: string, token: string) => Promise<void>;
 }
 
 export const TeamContext = createContext<TeamContextData>({
   teams: [],
   handleSetTeams: () => { },
   selectedTeam: {} as ITeam,
-  selectTeam: () => { },
+  selectTeam: async () => { },
 });
 
 export default function TeamContextProvider({ children }: { children: ReactNode; }) {
-  const [teams, setTeams] = useState<ITeam[]>([]);
+  const [teams, setTeams] = useState<IUserTeam[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<ITeam>({} as ITeam);
 
-  function handleSetTeams(teams: ITeam[]) {
+  function handleSetTeams(teams: IUserTeam[]) {
     if (teams.length < 1) return;
 
     setTeams(teams);
   }
 
-  function selectTeam(team_id: string) {
-    const team = teams.find((currentTeam) => currentTeam.id === team_id);
+  async function selectTeam(teamId: string, token: string) {
+    const team = teams.find((currentTeam) => currentTeam.id === teamId);
 
     if (!team) {
       toast.error('O time escolhido não foi encontrado ou não existe mais.');
       return;
     }
 
-    setSelectedTeam(team);
+    console.log(`Token: ${token}`);
+
+    const response = await TeamService.getTeamInfo(teamId, token);
+
+    if (!response) return;
+
+    console.log(response.data);
+
+    setSelectedTeam(response.data);
   }
 
   const contextData: TeamContextData = {

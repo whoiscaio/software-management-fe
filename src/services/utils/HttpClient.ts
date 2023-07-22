@@ -8,9 +8,13 @@ export class HttpClient {
     this.baseURL = `${import.meta.env.VITE_API_URL}${prefix}`;
   }
 
-  async get(uri: string) {
+  async get(uri: string, token: string) {
     try {
-      const response = await axios(`${this.baseURL}${uri}`);
+      const response = await axios(`${this.baseURL}${uri}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
       return response;
     } catch (error) {

@@ -100,7 +100,7 @@ export default function Auth({ as }: AuthProps) {
       if (response) {
         const { user } = decode(response.data.token);
 
-        authenticate(user);
+        authenticate(user, response.data.token);
         handleSetTeams(user.teams);
       }
 
