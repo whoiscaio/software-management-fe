@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useContext, useState } from 'react';
 import { ITeam, ISimpleTeam } from '../types/teamTypes';
 import { toast } from 'react-toastify';
 import TeamService from '../services/TeamService';
