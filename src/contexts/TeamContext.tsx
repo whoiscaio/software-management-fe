@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useContext, useState } from 'react';
 import { ITeam, IUserTeam } from '../types/teamTypes';
 import { toast } from 'react-toastify';
 import TeamService from '../services/TeamService';
+import { AuthContext } from './AuthContext';
 
 interface TeamContextData {
   teams: IUserTeam[];
   handleSetTeams: (teams: IUserTeam[]) => void;
   selectedTeam: ITeam;
-  selectTeam: (teamId: string, token: string) => Promise<void>;
+  selectTeam: (teamId: string) => Promise<void>;
 }
 
 export const TeamContext = createContext<TeamContextData>({
@@ -19,6 +20,8 @@ export const TeamContext = createContext<TeamContextData>({
 });
 
 export default function TeamContextProvider({ children }: { children: ReactNode; }) {
+  const { token } = useContext(AuthContext);
+
   const [teams, setTeams] = useState<IUserTeam[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<ITeam>({} as ITeam);
 
@@ -28,7 +31,7 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
     setTeams(teams);
   }
 
-  async function selectTeam(teamId: string, token: string) {
+  async function selectTeam(teamId: string) {
     const team = teams.find((currentTeam) => currentTeam.id === teamId);
 
     if (!team) {

@@ -1,10 +1,8 @@
 import { SidebarContainer } from '../styles';
 import { useContext } from 'react';
 import { TeamContext } from '../../../contexts/TeamContext';
-import { AuthContext } from '../../../contexts/AuthContext';
 
 export default function Sidebar() {
-  const { token } = useContext(AuthContext);
   const { teams, selectedTeam, selectTeam } = useContext(TeamContext);
 
   return (
@@ -19,7 +17,7 @@ export default function Sidebar() {
               key={team.id}
               type="button"
               className={`contrast-button ${team.id === selectedTeam.id ? 'selected' : ''}`}
-              onClick={() => selectTeam(team.id, token)}
+              onClick={() => selectTeam(team.id)}
             >
               {team.name}
             </button>
