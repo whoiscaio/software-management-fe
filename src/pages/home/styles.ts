@@ -1,11 +1,13 @@
 import { styled } from 'styled-components';
 
 const HomePageContainer = styled.section`
+  border-radius: 2rem;
+
   height: 100%;
 
-  padding: 2rem 0;
-
   display: flex;
+
+  box-shadow: ${({ theme }) => theme.shadow};
 
   .main-content {
     flex: 1;

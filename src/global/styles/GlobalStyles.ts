@@ -99,9 +99,15 @@ const GlobalStyles = createGlobalStyle`
 
     padding: .4rem;
 
+    box-shadow: ${({ theme }) => theme.smallShadow};
+
     &.selected {
       background: ${({ theme }) => theme.colors.darkSecondary};
     }
+  }
+
+  main .app-context {
+    margin: 2rem 0;
   }
 `;
 
