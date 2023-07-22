@@ -1,27 +1,27 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import handleEmitError from '../global/utils/handleEmitError';
 import { HttpClient } from './utils/HttpClient';
-import { ITeam } from '../types/teamTypes';
+import { IWorkspace } from '../types/workspaceTypes';
 
-class TeamService {
+class WorkspaceService {
   private httpClient: HttpClient;
 
   constructor() {
-    this.httpClient = new HttpClient('/teams');
+    this.httpClient = new HttpClient('/workspaces');
   }
 
-  async getTeam(teamId: string, token: string) {
+  async getWorkspace(workspaceId: string, token: string) {
     if (!token) return;
 
-    const response = await this.httpClient.get(`/${teamId}`, token);
+    const response = await this.httpClient.get(`/${workspaceId}`, token);
 
     if (response instanceof AxiosError) {
       handleEmitError(response.response?.data.message);
       return;
     }
 
-    return response as AxiosResponse<ITeam>;
+    return response as AxiosResponse<IWorkspace>;
   }
 }
 
-export default new TeamService();
+export default new WorkspaceService();

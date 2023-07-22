@@ -5,6 +5,7 @@ import mainTheme from '../styles/theme/mainTheme';
 import GlobalStyles from '../styles/GlobalStyles';
 import AuthContextProvider from '../../contexts/AuthContext';
 import TeamContextProvider from '../../contexts/TeamContext';
+import WorkspaceContextProvider from '../../contexts/WorkspaceContext';
 
 type ProviderProps = {
   children: ReactNode;
@@ -16,9 +17,11 @@ export default function Provider({ children }: ProviderProps) {
       <GlobalStyles />
       <AuthContextProvider>
         <TeamContextProvider>
-          <BrowserRouter>
-            {children}
-          </BrowserRouter>
+          <WorkspaceContextProvider>
+            <BrowserRouter>
+              {children}
+            </BrowserRouter>
+          </WorkspaceContextProvider>
         </TeamContextProvider>
       </AuthContextProvider>
     </ThemeProvider>

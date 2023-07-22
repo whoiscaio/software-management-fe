@@ -39,13 +39,9 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
       return;
     }
 
-    console.log(`Token: ${token}`);
-
-    const response = await TeamService.getTeamInfo(teamId, token);
+    const response = await TeamService.getTeam(teamId, token);
 
     if (!response) return;
-
-    console.log(response.data);
 
     setSelectedTeam(response.data);
   }
