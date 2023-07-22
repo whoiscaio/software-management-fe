@@ -1,9 +1,9 @@
-import { IUserTeam } from './teamTypes';
+import { ISimpleTeam } from './teamTypes';
 
 export interface IAccount {
   id: string;
   username: string;
-  teams: IUserTeam[];
+  teams: ISimpleTeam[];
 }
 
 export interface ITokenResponse {
