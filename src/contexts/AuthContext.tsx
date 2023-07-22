@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useState } from 'react';
 
 import { IAccount } from '../types/accountTypes';
 
@@ -24,10 +24,6 @@ export default function AuthContextProvider({ children }: { children: ReactNode;
   const [account, setAccount] = useState<IAccount>({} as IAccount);
   const [token, setToken] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
-  useEffect(() => {
-    console.log(token);
-  }, [token]);
 
   function authenticate(user: IAccount, token: string) {
     setAccount(user);
