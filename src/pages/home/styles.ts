@@ -6,6 +6,13 @@ const HomePageContainer = styled.section`
   padding: 2rem 0;
 
   display: flex;
+
+  .main-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const SidebarContainer = styled.aside`
@@ -41,19 +48,32 @@ export const SidebarContainer = styled.aside`
     flex-direction: column;
 
     gap: .8rem;
+  }
+`;
 
-    button {
-      font-size: 1.2rem;
-      font-weight: 700;
+export const HomeHeaderContainer = styled.header`
+  display: flex;
+  flex-direction: column;
+  
+  gap: 1rem;
 
-      text-align: center;
+  padding: 1rem;
 
-      padding: .4rem;
+  text-align: center;
 
-      &.selected {
-        background: ${({ theme }) => theme.colors.darkSecondary};
-      }
-    }
+  h1 {
+    font-size: 2rem;
+  }
+
+  h1, h2, p {
+    color: ${({ theme }) => theme.colors.black};
+  }
+
+  .workspaces-list {
+    display: flex;
+    justify-content: center;
+
+    gap: 1.4rem;
   }
 `;
 

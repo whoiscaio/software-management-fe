@@ -5,6 +5,7 @@ const mainTheme = {
     secondary: '#FCA311',
     darkSecondary: '#BA780E',
     white: '#FFFEF7',
+    black: '#000708',
     darkLine: '#0E0E0E',
     lightLine: '#F2F2E7',
     error: '#ff4941',

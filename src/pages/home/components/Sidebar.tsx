@@ -16,7 +16,7 @@ export default function Sidebar() {
             <button
               key={team.id}
               type="button"
-              className={`contrast-button ${team.id === selectedTeam.id ? 'selected' : ''}`}
+              className={`contrast-button button-pattern-measures ${team.id === selectedTeam.id ? 'selected' : ''}`}
               onClick={() => selectTeam(team.id)}
             >
               {team.name}

@@ -90,6 +90,19 @@ const GlobalStyles = createGlobalStyle`
       transform: scale(.97);
     }
   }
+
+  .button-pattern-measures {
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    text-align: center;
+
+    padding: .4rem;
+
+    &.selected {
+      background: ${({ theme }) => theme.colors.darkSecondary};
+    }
+  }
 `;
 
 export default GlobalStyles;

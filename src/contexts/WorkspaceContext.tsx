@@ -12,7 +12,7 @@ interface WorkspaceContextData {
   selectWorkspace: (workspaceId: string) => Promise<void>;
 }
 
-const WorkspaceContext = createContext<WorkspaceContextData>({
+export const WorkspaceContext = createContext<WorkspaceContextData>({
   workspaces: [],
   handleSetWorkspaces: () => { },
   selectedWorkspace: {} as IWorkspace,
@@ -26,8 +26,6 @@ export default function WorkspaceContextProvider({ children }: { children: React
   const [selectedWorkspace, setSelectedWorkspace] = useState<IWorkspace>({} as IWorkspace);
 
   function handleSetWorkspaces(workspaces: ISimpleWorkspace[]) {
-    if (workspaces.length < 1) return;
-
     setWorkspaces(workspaces);
   }
 
