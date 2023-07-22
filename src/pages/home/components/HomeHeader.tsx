@@ -14,7 +14,7 @@ export default function HomeHeader() {
       </div>
       <div className="workspaces-list">
         {
-          workspaces.map((workspace) => (
+          workspaces?.map((workspace) => (
             <button
               className={`contrast-button button-pattern-measures ${selectedWorkspace.id === workspace.id ? 'selected' : ''}`}
               type="button"

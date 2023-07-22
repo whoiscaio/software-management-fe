@@ -13,8 +13,6 @@ export default function Home() {
   useEffect(() => {
     if (!selectedTeam) return;
 
-    console.log(selectedTeam);
-
     handleSetWorkspaces(selectedTeam.workspaces);
   }, [selectedTeam, handleSetWorkspaces]);
 
@@ -24,7 +22,7 @@ export default function Home() {
         <Sidebar />
         <div className="main-content">
           {
-            selectedTeam ? (
+            selectedTeam?.name ? (
               <>
                 <HomeHeader />
                 <div className="phase-listing">Phase list</div>

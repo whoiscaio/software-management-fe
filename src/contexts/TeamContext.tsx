@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { ITeam, ISimpleTeam } from '../types/teamTypes';
 import { toast } from 'react-toastify';
 import TeamService from '../services/TeamService';
@@ -10,6 +10,7 @@ interface TeamContextData {
   handleSetTeams: (teams: ISimpleTeam[]) => void;
   selectedTeam: ITeam;
   selectTeam: (teamId: string) => Promise<void>;
+  reset: () => void;
 }
 
 export const TeamContext = createContext<TeamContextData>({
@@ -17,6 +18,7 @@ export const TeamContext = createContext<TeamContextData>({
   handleSetTeams: () => { },
   selectedTeam: {} as ITeam,
   selectTeam: async () => { },
+  reset: () => { },
 });
 
 export default function TeamContextProvider({ children }: { children: ReactNode; }) {
@@ -24,6 +26,11 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
 
   const [teams, setTeams] = useState<ISimpleTeam[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<ITeam>({} as ITeam);
+
+  function reset() {
+    setTeams([]);
+    setSelectedTeam({} as ITeam);
+  }
 
   function handleSetTeams(teams: ISimpleTeam[]) {
     if (teams.length < 1) return;
@@ -50,7 +57,8 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
     teams,
     handleSetTeams,
     selectedTeam,
-    selectTeam
+    selectTeam,
+    reset
   };
 
   return (

@@ -3,9 +3,19 @@ import HeaderContainer from './styles';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { LogOut, UserCircle2 } from 'lucide-react';
+import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
+import { TeamContext } from '../../../contexts/TeamContext';
 
 export default function Header() {
   const { account, isAuthenticated, logout } = useContext(AuthContext);
+  const { reset: teamReset } = useContext(TeamContext);
+  const { reset: workspaceReset } = useContext(WorkspaceContext);
+
+  function handleLogout() {
+    workspaceReset();
+    teamReset();
+    logout();
+  }
 
   return (
     <HeaderContainer>
@@ -21,7 +31,7 @@ export default function Header() {
                   <UserCircle2 color="#ffffff" size={40} />
                   <p>Olá, {account.username}</p>
                 </div>
-                <button type="button" onClick={logout}>
+                <button type="button" onClick={handleLogout}>
                   <LogOut />
                 </button>
               </div>
