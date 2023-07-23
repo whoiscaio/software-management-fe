@@ -92,7 +92,7 @@ const GlobalStyles = createGlobalStyle`
 
     text-align: center;
 
-    padding: .4rem;
+    padding: .4rem .8rem;
 
     box-shadow: ${({ theme }) => theme.smallShadow};
 

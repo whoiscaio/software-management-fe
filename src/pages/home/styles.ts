@@ -15,8 +15,23 @@ const HomePageContainer = styled.section`
     margin-bottom: .6rem;
   }
 
-  header {
+  > header {
+    display: flex;
+    justify-content: space-between;
+
     margin-bottom: 2rem;
+
+    .action {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      
+      gap: 1rem;
+    }
   }
 `;
 
@@ -30,6 +45,24 @@ export const PhaseListContainer = styled.div`
   overflow: auto;
 
   .phase {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    padding-bottom: 1rem;
+
+    border-bottom: 2px solid ${({ theme }) => theme.colors.lightLine};
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        display: flex;
+      }
+    }
+
     h3 {
       font-size: 2rem;
     }
@@ -63,13 +96,47 @@ export const PhaseListContainer = styled.div`
         box-shadow: 0;
 
         &:hover {
-          font-weight: 700;
+          background: ${({ theme }) => theme.colors.darkGray};
+        }
+
+        > p {
+          flex: 1;
         }
 
         .tag {
           color: ${({ theme }) => theme.colors.white};
 
           box-shadow: 0;
+        }
+
+        .actions {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+
+          button {
+            transition: transform .12s ease;
+
+            &:hover {
+              transform: scale(1.05);
+            }
+          }
+        }
+      }
+    }
+
+    .action {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+
+      button {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        &:first-of-type {
+          background: ${({ theme }) => theme.colors.main};
         }
       }
     }
