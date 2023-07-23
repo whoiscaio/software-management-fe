@@ -7,6 +7,8 @@ const RootContainer = styled.div`
   height: 100vh;
 
   display: flex;
+
+  overflow: hidden;
 `;
 
 export default RootContainer;

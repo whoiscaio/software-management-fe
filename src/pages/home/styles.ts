@@ -4,6 +4,8 @@ const HomePageContainer = styled.section`
   width: 100%;
   padding: 2rem;
 
+  overflow: auto;
+
   h1, h2, h3, h4, p {
     color: ${({ theme }) => theme.colors.black};
   }
