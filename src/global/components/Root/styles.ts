@@ -7,10 +7,6 @@ const RootContainer = styled.div`
   height: 100vh;
 
   display: flex;
-
-  .content-wrapper {
-    flex: 1;
-  }
 `;
 
 export default RootContainer;

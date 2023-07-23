@@ -26,11 +26,6 @@ const GlobalStyles = createGlobalStyle`
     outline: none;
   }
 
-  .app-context {
-    width: 94%;
-    max-width: 1200px;
-  }
-
   input {
     border: 0;
   }

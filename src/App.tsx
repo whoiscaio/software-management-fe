@@ -8,9 +8,7 @@ function App() {
     <>
       <Root>
         <MainSidebar />
-        <div className="content-wrapper">
-          <Router />
-        </div>
+        <Router />
       </Root>
       <Notifier />
     </>

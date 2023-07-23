@@ -5,11 +5,12 @@ import MainSidebarContainer from './styles';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 import { TeamContext } from '../../../contexts/TeamContext';
+import { toast } from 'react-toastify';
 
 export default function MainSidebar() {
   const { account, isAuthenticated, logout } = useContext(AuthContext);
   const { selectedTeam, selectTeam, reset: teamReset } = useContext(TeamContext);
-  const { workspaces, selectedWorkspace, selectWorkspace, reset: workspaceReset } = useContext(WorkspaceContext);
+  const { workspaces, selectedWorkspace, handleSetWorkspaces, selectWorkspace, reset: workspaceReset } = useContext(WorkspaceContext);
 
   const selectTrigger = useRef<HTMLDivElement>(null);
 
@@ -41,6 +42,12 @@ export default function MainSidebar() {
     () => document.removeEventListener('click', handleClickOutside);
   }, [isSelectMenuOpen, selectTrigger]);
 
+  useEffect(() => {
+    if (!selectedTeam) return;
+
+    handleSetWorkspaces(selectedTeam.workspaces);
+  }, [selectedTeam, handleSetWorkspaces]);
+
   return (
     <MainSidebarContainer>
       <div className="heading-wrapper">
@@ -58,18 +65,18 @@ export default function MainSidebar() {
                 <p>{selectedTeam?.name || 'Selecione seu time'}</p>
                 {isSelectMenuOpen ? <ChevronUp /> : <ChevronDown />}
                 {
-                isSelectMenuOpen && (
-                  <div className="select-options">
-                    {
-                      account.teams.map((team) => (
-                        <div className="option" onClick={(e) => handleSelectTeam(e, team.id)}>
-                          <p>{team.name}</p>
-                        </div>
-                      ))
-                    }
-                  </div>
-                )
-              }
+                  isSelectMenuOpen && (
+                    <div className="select-options">
+                      {
+                        account.teams.map((team) => (
+                          <div className="option" onClick={(e) => handleSelectTeam(e, team.id)}>
+                            <p>{team.name}</p>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  )
+                }
               </div>
             </div>
             {

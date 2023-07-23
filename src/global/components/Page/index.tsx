@@ -9,9 +9,7 @@ type PageProps = {
 export default function Page({ children, verticalAlign }: PageProps) {
   return (
     <PageContainer $verticalAlign={verticalAlign}>
-      <div className="app-context">
-        {children}
-      </div>
+      {children}
     </PageContainer>
   );
 }

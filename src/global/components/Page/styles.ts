@@ -5,10 +5,9 @@ type PageContainerProps = {
 };
 
 const PageContainer = styled.main<PageContainerProps>`
-  height: 100%;
+  flex: 1;
 
   display: flex;
-  justify-content: center;
 
   align-items: ${({ $verticalAlign }) => $verticalAlign || 'initial'};
 `;

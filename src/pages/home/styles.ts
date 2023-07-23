@@ -1,23 +1,8 @@
 import { styled } from 'styled-components';
 
 const HomePageContainer = styled.section`
-  border-radius: 2rem;
-
-  height: 100%;
-
-  display: flex;
-
-  box-shadow: ${({ theme }) => theme.shadow};
-
-  .main-content {
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-
-    h1, h2, h3, h4, p {
-      color: ${({ theme }) => theme.colors.black};
-    }
+  h1, h2, h3, h4, p {
+    color: ${({ theme }) => theme.colors.black};
   }
 `;
 
