@@ -4,7 +4,7 @@ const HomePageContainer = styled.section`
   width: 100%;
   padding: 2rem;
 
-  overflow: auto;
+  overflow-y: auto;
 
   h1, h2, h3, h4, p {
     color: ${({ theme }) => theme.colors.black};
@@ -62,12 +62,18 @@ export const PhaseListContainer = styled.div`
 
         box-shadow: 0;
 
+        &:hover {
+          font-weight: 700;
+        }
+
         .tag {
           color: ${({ theme }) => theme.colors.white};
+
+          box-shadow: 0;
         }
       }
     }
   }
-`
+`;
 
 export default HomePageContainer;
