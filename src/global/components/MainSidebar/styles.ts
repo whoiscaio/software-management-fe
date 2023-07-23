@@ -113,6 +113,19 @@ const MainSidebarContainer = styled.aside`
     flex-direction: column;
 
     gap: 1rem;
+
+    button {
+      background: ${({ theme }) => theme.colors.lightMain};
+      border-radius: .4rem;
+
+      &.selected {
+        background: ${({ theme }) => theme.colors.darkMain};
+      }
+
+      &:hover {
+        opacity: .8;
+      }
+    }
   }
 `;
 

@@ -9,7 +9,7 @@ import { TeamContext } from '../../../contexts/TeamContext';
 export default function MainSidebar() {
   const { account, isAuthenticated, logout } = useContext(AuthContext);
   const { selectedTeam, selectTeam, reset: teamReset } = useContext(TeamContext);
-  const { workspaces, selectWorkspace, reset: workspaceReset } = useContext(WorkspaceContext);
+  const { workspaces, selectedWorkspace, selectWorkspace, reset: workspaceReset } = useContext(WorkspaceContext);
 
   const selectTrigger = useRef<HTMLDivElement>(null);
 
@@ -77,7 +77,11 @@ export default function MainSidebar() {
                 <div className="workspaces">
                   {
                     workspaces.map((workspace) => (
-                      <button type="button" onClick={() => selectWorkspace(workspace.id)}>{workspace.name}</button>
+                      <button
+                        type="button"
+                        className={`button-pattern-measures ${selectedWorkspace.id === workspace.id ? 'selected' : ''}`}
+                        onClick={() => selectWorkspace(workspace.id)}
+                      >{workspace.name}</button>
                     ))
                   }
                 </div>

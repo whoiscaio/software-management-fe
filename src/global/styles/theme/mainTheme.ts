@@ -1,5 +1,6 @@
 const mainTheme = {
   colors: {
+    darkMain: '#081328',
     main: '#14213D',
     lightMain: '#485570',
     secondary: '#FCA311',
