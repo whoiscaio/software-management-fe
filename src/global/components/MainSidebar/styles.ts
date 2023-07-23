@@ -49,9 +49,30 @@ const MainSidebarContainer = styled.aside`
     background: ${({ theme }) => theme.colors.white};
     border-radius: .4rem;
 
+    margin-bottom: 1rem;
+
+    &.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
     .select-trigger {
       display: flex;
       justify-content: space-between;
+
+      position: relative;
+
+      .select-options {
+        background: ${({ theme }) => theme.colors.white};
+        border-bottom-left-radius: .4rem;
+        border-bottom-right-radius: .4rem;
+
+        position: absolute;
+
+        width: 100%;
+        left: 0;
+        top: 100%;
+      }
     }
 
     .option {
@@ -85,6 +106,13 @@ const MainSidebarContainer = styled.aside`
         color: ${({ theme }) => theme.colors.main};
       }
     }
+  }
+
+  .workspaces {
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
   }
 `;
 

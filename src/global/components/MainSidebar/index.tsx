@@ -9,7 +9,7 @@ import { TeamContext } from '../../../contexts/TeamContext';
 export default function MainSidebar() {
   const { account, isAuthenticated, logout } = useContext(AuthContext);
   const { selectedTeam, selectTeam, reset: teamReset } = useContext(TeamContext);
-  const { reset: workspaceReset } = useContext(WorkspaceContext);
+  const { workspaces, selectWorkspace, reset: workspaceReset } = useContext(WorkspaceContext);
 
   const selectTrigger = useRef<HTMLDivElement>(null);
 
@@ -49,12 +49,15 @@ export default function MainSidebar() {
       {
         isAuthenticated && account && account.username && account.teams.length > 0 && (
           <div className="action-section">
-            <div className="select-team">
-              <div className="select-trigger" ref={selectTrigger} onClick={() => setIsSelectMenuOpen((prevState) => !prevState)}>
+            <div className={`select-team ${isSelectMenuOpen ? 'open' : ''}`}>
+              <div
+                className="select-trigger"
+                ref={selectTrigger}
+                onClick={() => setIsSelectMenuOpen((prevState) => !prevState)}
+              >
                 <p>{selectedTeam?.name || 'Selecione seu time'}</p>
                 {isSelectMenuOpen ? <ChevronUp /> : <ChevronDown />}
-              </div>
-              {
+                {
                 isSelectMenuOpen && (
                   <div className="select-options">
                     {
@@ -67,7 +70,19 @@ export default function MainSidebar() {
                   </div>
                 )
               }
+              </div>
             </div>
+            {
+              workspaces && workspaces.length > 0 && (
+                <div className="workspaces">
+                  {
+                    workspaces.map((workspace) => (
+                      <button type="button" onClick={() => selectWorkspace(workspace.id)}>{workspace.name}</button>
+                    ))
+                  }
+                </div>
+              )
+            }
           </div>
         )
       }

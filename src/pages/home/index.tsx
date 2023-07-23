@@ -13,8 +13,6 @@ export default function Home() {
 
   function handleSelectWorkspace(workspaceId: string) {
     selectWorkspace(workspaceId);
-
-    // gather processes
   }
 
   useEffect(() => {
