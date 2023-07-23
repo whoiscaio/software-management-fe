@@ -8,6 +8,7 @@ const mainTheme = {
     black: '#000708',
     darkLine: '#0E0E0E',
     lightLine: '#F2F2E7',
+    gray: '#e8e8e8',
     error: '#ff4941',
   },
   shadow: '0 5px 10px 0px rgba(0,0,0,0.18)',
