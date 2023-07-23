@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { PhaseListContainer } from '../styles';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
-import PhaseColumn from './PhaseColumn';
+import Phase from './Phase';
 
 export default function PhaseList() {
   const { selectedWorkspace } = useContext(WorkspaceContext);
@@ -12,7 +12,7 @@ export default function PhaseList() {
     <PhaseListContainer>
       {
         selectedWorkspace?.phases?.map((phase) => (
-          <PhaseColumn key={phase.id} phase={phase} />
+          <Phase key={phase.id} phase={phase} />
         ))
       }
     </PhaseListContainer>

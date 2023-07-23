@@ -1,10 +1,9 @@
 import Page from '../../global/components/Page';
 import HomePageContainer from './styles';
-import Sidebar from './components/Sidebar';
-import HomeHeader from './components/HomeHeader';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { TeamContext } from '../../contexts/TeamContext';
 import { WorkspaceContext } from '../../contexts/WorkspaceContext';
+import PhaseList from './components/PhaseList';
 
 export default function Home() {
   const { selectedTeam } = useContext(TeamContext);
@@ -20,6 +19,7 @@ export default function Home() {
                 <h1>Gerenciamento de processos</h1>
                 <h2>{selectedTeam.name}</h2>
               </header>
+              <PhaseList />
             </>
           ) : (
             <p>Nenhum workspace foi selecionado</p>

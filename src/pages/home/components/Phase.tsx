@@ -1,22 +1,21 @@
 import { IPhase } from '../../../types/mainTypes';
 
-type PhaseColumnProps = {
+type PhaseProps = {
   phase: IPhase;
 };
 
-export default function PhaseColumn({ phase }: PhaseColumnProps) {
-  console.log(phase.processes);
-
+export default function Phase({ phase }: PhaseProps) {
   return (
-    <div className="phase-column" key={phase.id}>
+    <div className="phase" key={phase.id}>
       <header>
         <h3>{phase.name}</h3>
       </header>
       <div className="process-list">
         {
           phase.processes?.map((process) => (
-            <button className="contrast-button scale-down-hover-effect button-pattern-measures">
-              {process.name}
+            <button className="process-button">
+              <div className="tag button-pattern-measures contrast-button">Em andamento</div>
+              <p>{process.name}</p>
             </button>
           ))
         }

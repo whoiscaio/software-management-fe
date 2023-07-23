@@ -5,7 +5,6 @@ import MainSidebarContainer from './styles';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 import { TeamContext } from '../../../contexts/TeamContext';
-import { toast } from 'react-toastify';
 
 export default function MainSidebar() {
   const { account, isAuthenticated, logout } = useContext(AuthContext);
