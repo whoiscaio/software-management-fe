@@ -55,10 +55,6 @@ const MainSidebarContainer = styled.aside`
     }
 
     .option {
-      &, * {
-        cursor: pointer;
-      }
-
       &:last-of-type {
         border-bottom-left-radius: .4rem;
         border-bottom-right-radius: .4rem;
@@ -71,6 +67,10 @@ const MainSidebarContainer = styled.aside`
 
     .select-trigger, .option {
       padding: 1rem;
+
+      &, * {
+        cursor: pointer;
+      }
     }
 
     > div {

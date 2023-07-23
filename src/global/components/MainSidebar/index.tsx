@@ -1,5 +1,5 @@
 import { ChevronDown, ChevronUp, LogOut, User2 } from 'lucide-react';
-import { useContext, useState } from 'react';
+import { MouseEvent as ReactMouseEvent, useContext, useEffect, useRef, useState } from 'react';
 
 import MainSidebarContainer from './styles';
 import { AuthContext } from '../../../contexts/AuthContext';
@@ -11,6 +11,8 @@ export default function MainSidebar() {
   const { selectedTeam, selectTeam, reset: teamReset } = useContext(TeamContext);
   const { reset: workspaceReset } = useContext(WorkspaceContext);
 
+  const selectTrigger = useRef<HTMLDivElement>(null);
+
   const [isSelectMenuOpen, setIsSelectMenuOpen] = useState<boolean>(false);
 
   function handleLogout() {
@@ -19,11 +21,25 @@ export default function MainSidebar() {
     logout();
   }
 
-  function handleSelectTeam(teamId: string) {
+  function handleSelectTeam(e: ReactMouseEvent<HTMLDivElement>, teamId: string) {
+    e.stopPropagation();
+
     workspaceReset();
     selectTeam(teamId);
     setIsSelectMenuOpen(false);
   }
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (selectTrigger.current && isSelectMenuOpen && !selectTrigger.current.contains(e.target as Node)) {
+        setIsSelectMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside);
+
+    () => document.removeEventListener('click', handleClickOutside);
+  }, [isSelectMenuOpen, selectTrigger]);
 
   return (
     <MainSidebarContainer>
@@ -34,7 +50,7 @@ export default function MainSidebar() {
         isAuthenticated && account && account.username && account.teams.length > 0 && (
           <div className="action-section">
             <div className="select-team">
-              <div className="select-trigger" onClick={() => setIsSelectMenuOpen((prevState) => !prevState)}>
+              <div className="select-trigger" ref={selectTrigger} onClick={() => setIsSelectMenuOpen((prevState) => !prevState)}>
                 <p>{selectedTeam?.name || 'Selecione seu time'}</p>
                 {isSelectMenuOpen ? <ChevronUp /> : <ChevronDown />}
               </div>
@@ -43,7 +59,7 @@ export default function MainSidebar() {
                   <div className="select-options">
                     {
                       account.teams.map((team) => (
-                        <div className="option" onClick={() => handleSelectTeam(team.id)}>
+                        <div className="option" onClick={(e) => handleSelectTeam(e, team.id)}>
                           <p>{team.name}</p>
                         </div>
                       ))
