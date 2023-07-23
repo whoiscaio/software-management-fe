@@ -3,9 +3,13 @@ import { HomeHeaderContainer } from '../styles';
 import { TeamContext } from '../../../contexts/TeamContext';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 
-export default function HomeHeader() {
+type HomeHeaderProps = {
+  selectWorkspace: (workspaceId: string) => void;
+};
+
+export default function HomeHeader({ selectWorkspace }: HomeHeaderProps) {
   const { selectedTeam } = useContext(TeamContext);
-  const { selectedWorkspace, workspaces, selectWorkspace } = useContext(WorkspaceContext);
+  const { selectedWorkspace, workspaces } = useContext(WorkspaceContext);
 
   return (
     <HomeHeaderContainer>

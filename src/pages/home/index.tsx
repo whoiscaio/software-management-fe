@@ -9,7 +9,13 @@ import PhaseList from './components/PhaseList';
 
 export default function Home() {
   const { selectedTeam } = useContext(TeamContext);
-  const { selectedWorkspace, handleSetWorkspaces } = useContext(WorkspaceContext);
+  const { selectedWorkspace, selectWorkspace, handleSetWorkspaces } = useContext(WorkspaceContext);
+
+  function handleSelectWorkspace(workspaceId: string) {
+    selectWorkspace(workspaceId);
+
+    // gather processes
+  }
 
   useEffect(() => {
     if (!selectedTeam) return;
@@ -25,7 +31,7 @@ export default function Home() {
           {
             selectedTeam?.name ? (
               <>
-                <HomeHeader />
+                <HomeHeader selectWorkspace={handleSelectWorkspace} />
                 {
                   selectedWorkspace?.name ? (
                     <PhaseList />

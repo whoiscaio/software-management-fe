@@ -113,6 +113,15 @@ export const PhaseListContainer = styled.div`
         color: ${({ theme }) => theme.colors.white};
       }
     }
+
+    .process-list {
+      display: flex;
+      flex-direction: column;
+
+      padding: .6rem;
+
+      gap: .4rem;
+    }
   }
 `
 
