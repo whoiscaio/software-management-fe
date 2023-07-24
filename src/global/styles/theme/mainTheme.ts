@@ -10,6 +10,7 @@ const mainTheme = {
     darkLine: '#0E0E0E',
     lightLine: '#F2F2E7',
     darkGray: '#d2d2d2',
+    darkerGray: '#808080',
     gray: '#e8e8e8',
     lightGray: '#f6f6f6',
     error: '#ff4941',
