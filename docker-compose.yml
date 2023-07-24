@@ -1,0 +1,17 @@
+# build with 'docker compose -f docker-compose.yml up --build'
+# do not forget to also compose the api
+
+version: '3'
+services:
+  api:
+    container_name: manageapp-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5173:5173'
+    networks:
+      - manageapp-network
+networks:
+  manageapp-network:
+    driver: bridge
