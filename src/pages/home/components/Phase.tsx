@@ -4,6 +4,7 @@ import Process from './Process';
 import { useState } from 'react';
 import { PhaseContainer } from '../styles';
 import Dialog from '../../../global/components/dialogs/Dialog';
+import FormModal from '../../../global/components/dialogs/FormModal';
 
 type PhaseProps = {
   phase: IPhase;
@@ -11,9 +12,13 @@ type PhaseProps = {
 
 export default function Phase({ phase }: PhaseProps) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
+  const [isEditPhaseFormOpen, setIsEditPhaseFormOpen] = useState<boolean>(false);
+  const [isCreateProcessFormOpen, setIsCreateProcessFormOpen] = useState<boolean>(false);
 
-  function handleEditPhase() {
+  async function handleEditPhase(name: string, description?: string) {
     console.log('HANDLE EDIT PHASE');
+
+    setIsEditPhaseFormOpen(false);
   }
 
   function handleDeletePhase() {
@@ -22,8 +27,10 @@ export default function Phase({ phase }: PhaseProps) {
     setIsDeleteDialogOpen(false);
   }
 
-  function handleCreateProcess() {
+  async function handleCreateProcess(name: string, description?: string) {
     console.log('CREATE NEW PROCESS');
+
+    setIsCreateProcessFormOpen(false)
   }
 
   return (
@@ -47,12 +54,12 @@ export default function Phase({ phase }: PhaseProps) {
         <div className="action">
           <button
             type="button"
-            onClick={handleEditPhase}
+            onClick={() => setIsEditPhaseFormOpen(true)}
             className="contrast-button button-pattern-measures scale-down-hover-effect"
           ><Edit size={25} />Editar Fase</button>
           <button
             type="button"
-            onClick={handleCreateProcess}
+            onClick={() => setIsCreateProcessFormOpen(true)}
             className="contrast-button button-pattern-measures scale-down-hover-effect"
           ><Plus size={30} /> Novo processo</button>
         </div>
@@ -65,6 +72,28 @@ export default function Phase({ phase }: PhaseProps) {
             confirmButtonText="Sim, deletar fase"
             close={() => setIsDeleteDialogOpen(false)}
             confirm={handleDeletePhase}
+          />
+        )
+      }
+      {
+        isEditPhaseFormOpen && (
+          <FormModal
+            action={handleEditPhase}
+            close={() => setIsEditPhaseFormOpen(false)}
+            title="Editar Fase"
+            confirmButtonText="Editar Fase"
+            text1={phase.name}
+            text2={phase.description}
+          />
+        )
+      }
+      {
+        isCreateProcessFormOpen && (
+          <FormModal
+            action={handleCreateProcess}
+            close={() => setIsCreateProcessFormOpen(false)}
+            title="Criar processo"
+            confirmButtonText="Criar processo"
           />
         )
       }
