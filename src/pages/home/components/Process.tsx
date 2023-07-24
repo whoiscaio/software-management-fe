@@ -35,7 +35,7 @@ export default function Process({ process }: ProcessProps) {
   }
 
   const openSize = useMemo(() => (
-    61 * process.subprocesses.length + 71
+    61 * process.subprocesses.length + 90
   ), [process.subprocesses.length]);
 
   return (
@@ -51,12 +51,14 @@ export default function Process({ process }: ProcessProps) {
         </div>
         {
           process.subprocesses && process.subprocesses.length > 0 && (
-            <div className="subprocess-list">
-              {
-                process.subprocesses.map((subprocess) => (
-                  <Subprocess subprocess={subprocess} />
-                ))
-              }
+            <div className="subprocesses-wrapper">
+              <div className="subprocess-list">
+                {
+                  process.subprocesses.map((subprocess) => (
+                    <Subprocess subprocess={subprocess} />
+                  ))
+                }
+              </div>
             </div>
           )
         }

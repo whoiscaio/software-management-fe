@@ -170,6 +170,9 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
   background: ${({ theme }) => theme.colors.white};
   border-radius: .3rem;
 
+  display: flex;
+  flex-direction: column;
+
   height: 61px;
 
   overflow: hidden;
@@ -201,6 +204,13 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
     &:hover {
       background: ${({ theme }) => theme.colors.lightGray};
     }
+  }
+
+  .subprocesses-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .subprocess-list {
