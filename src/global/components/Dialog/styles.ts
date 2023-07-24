@@ -55,6 +55,7 @@ const DialogContainer = styled.div`
 
       &:hover {
         background: ${({ theme }) => theme.colors.gray};
+        transform: none;
       }
     }
 
@@ -64,6 +65,7 @@ const DialogContainer = styled.div`
 
       &:hover {
         background: ${({ theme }) => theme.colors.error}66;
+        transform: none;
       }
     }
   }

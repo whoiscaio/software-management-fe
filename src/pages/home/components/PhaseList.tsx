@@ -6,8 +6,6 @@ import Phase from './Phase';
 export default function PhaseList() {
   const { selectedWorkspace } = useContext(WorkspaceContext);
 
-  console.log(selectedWorkspace.phases);
-
   return (
     <PhaseListContainer>
       {
