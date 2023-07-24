@@ -1,4 +1,4 @@
-import { Plus, X } from 'lucide-react';
+import { Edit, Plus, X } from 'lucide-react';
 import { IPhase } from '../../../types/mainTypes';
 import Process from './Process';
 
@@ -24,11 +24,13 @@ export default function Phase({ phase }: PhaseProps) {
     <div className="phase" key={phase.id}>
       <header>
         <h3>{phase.name}</h3>
-        <button type="button" onClick={handleDeletePhase}><X color="#DD0000" size={30} /></button>
+        <button type="button" onClick={handleDeletePhase}><X color="#000000" size={30} /></button>
       </header>
       <div className="process-list">
         {
-          phase.processes?.map((process) => <Process process={process} />)
+          phase.processes && phase.processes.length > 0 ? phase.processes?.map((process) => <Process process={process} />) : (
+            <p>Essa fase não possui nenhum processo.</p>
+          )
         }
       </div>
       <div className="action">
@@ -36,7 +38,7 @@ export default function Phase({ phase }: PhaseProps) {
           type="button"
           onClick={handleEditPhase}
           className="contrast-button button-pattern-measures scale-down-hover-effect"
-        ><Plus size={30} />Editar {phase.name}</button>
+        ><Edit size={25} />Editar Fase</button>
         <button
           type="button"
           onClick={handleCreateProcess}

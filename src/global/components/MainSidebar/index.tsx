@@ -1,10 +1,11 @@
-import { ChevronDown, ChevronUp, LogOut, User2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, LogOut, Plus, User2 } from 'lucide-react';
 import { MouseEvent as ReactMouseEvent, useContext, useEffect, useRef, useState } from 'react';
 
 import MainSidebarContainer from './styles';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 import { TeamContext } from '../../../contexts/TeamContext';
+import Logo from '../Logo';
 
 export default function MainSidebar() {
   const { account, isAuthenticated, logout } = useContext(AuthContext);
@@ -29,6 +30,10 @@ export default function MainSidebar() {
     setIsSelectMenuOpen(false);
   }
 
+  function handleCreateWorkspace() {
+    console.log('HANDLE CREATE WORKSPACE');
+  }
+
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (selectTrigger.current && isSelectMenuOpen && !selectTrigger.current.contains(e.target as Node)) {
@@ -49,50 +54,60 @@ export default function MainSidebar() {
 
   return (
     <MainSidebarContainer>
-      <div className="heading-wrapper">
-        <h1>manage<span>app</span></h1>
-      </div>
+      <Logo />
       {
-        isAuthenticated && account && account.username && account.teams.length > 0 && (
+        isAuthenticated && account && account.username && (
           <div className="action-section">
-            <div className={`select-team ${isSelectMenuOpen ? 'open' : ''}`}>
-              <div
-                className="select-trigger"
-                ref={selectTrigger}
-                onClick={() => setIsSelectMenuOpen((prevState) => !prevState)}
-              >
-                <p>{selectedTeam?.name || 'Selecione seu time'}</p>
-                {isSelectMenuOpen ? <ChevronUp /> : <ChevronDown />}
-                {
-                  isSelectMenuOpen && (
-                    <div className="select-options">
-                      {
-                        account.teams.map((team) => (
-                          <div className="option" onClick={(e) => handleSelectTeam(e, team.id)}>
-                            <p>{team.name}</p>
-                          </div>
-                        ))
-                      }
-                    </div>
-                  )
-                }
-              </div>
-            </div>
+            <button type="button" className="new-team-button button-pattern-measures scale-down-hover-effect">
+              <Plus /> <span>Novo Time</span>
+            </button>
             {
-              workspaces && workspaces.length > 0 && (
-                <div className="workspaces">
-                  {
-                    workspaces.map((workspace) => (
-                      <button
-                        type="button"
-                        className={`button-pattern-measures ${selectedWorkspace.id === workspace.id ? 'selected' : ''}`}
-                        onClick={() => selectWorkspace(workspace.id)}
-                      >{workspace.name}</button>
-                    ))
-                  }
+              account.teams && account.teams.length > 0 && (
+                <div className={`select-team ${isSelectMenuOpen ? 'open' : ''}`}>
+                  <div
+                    className="select-trigger"
+                    ref={selectTrigger}
+                    onClick={() => setIsSelectMenuOpen((prevState) => !prevState)}
+                  >
+                    <p>{selectedTeam?.name || 'Selecione seu time'}</p>
+                    {isSelectMenuOpen ? <ChevronUp /> : <ChevronDown />}
+                    {
+                      isSelectMenuOpen && (
+                        <div className="select-options">
+                          {
+                            account.teams.map((team) => (
+                              <div className="option" onClick={(e) => handleSelectTeam(e, team.id)}>
+                                <p>{team.name}</p>
+                              </div>
+                            ))
+                          }
+                        </div>
+                      )
+                    }
+                  </div>
                 </div>
               )
             }
+            <div className="workspaces">
+              {
+                workspaces && workspaces.length > 0 && workspaces.map((workspace) => (
+                  <button
+                    type="button"
+                    className={`button-pattern-measures ${selectedWorkspace.id === workspace.id ? 'selected' : ''}`}
+                    onClick={() => selectWorkspace(workspace.id)}
+                  >{workspace.name}</button>
+                ))
+              }
+              {
+                selectedTeam && selectedTeam.name && (
+                  <button
+                    type="button"
+                    onClick={handleCreateWorkspace}
+                    className="new-workspace-button button-pattern-measures"
+                  ><Plus size={30} /> Novo Workspace</button>
+                )
+              }
+            </div>
           </div>
         )
       }

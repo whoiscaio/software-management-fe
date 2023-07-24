@@ -8,6 +8,7 @@ import AuthService from '../../services/AuthService';
 import { AuthContext } from '../../contexts/AuthContext';
 import { TeamContext } from '../../contexts/TeamContext';
 import decode from '../../global/utils/decode';
+import Logo from '../../global/components/Logo';
 
 type AuthProps = {
   as: 'login' | 'signup';
@@ -129,7 +130,11 @@ export default function Auth({ as }: AuthProps) {
   return (
     <Page verticalAlign='center'>
       <AuthContainer>
+        <Logo />
         <form onSubmit={handleSubmit}>
+          <header>
+            <h2>{as === 'login' ? 'LOGIN' : 'CADASTRO'}</h2>
+          </header>
           <div className="fields">
             <Field value={username} setValue={setUsername} label="Usuário" error={getErrors('username')} />
             <Field type="password" value={password} setValue={setPassword} label="Senha" error={getErrors('password')} />

@@ -14,16 +14,29 @@ const MainSidebarContainer = styled.aside`
 
   padding: 3rem 1rem;
 
-  .heading-wrapper {
-    text-align: center;
-
-    h1 span {
-      color: ${({ theme }) => theme.colors.secondary};
-    }
-  }
-
   .action-section {
     flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+
+    .new-team-button {
+      background: ${({ theme }) => theme.colors.white};
+      border-radius: .4rem;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+
+      padding: .8rem;
+      
+      > * {
+        color: ${({ theme }) => theme.colors.main};
+      }
+    }
   }
 
   .profile-footer {
@@ -122,8 +135,17 @@ const MainSidebarContainer = styled.aside`
         background: ${({ theme }) => theme.colors.darkMain};
       }
 
-      &:hover {
+      &:not(.new-workspace-button):hover {
         opacity: .8;
+      }
+
+      &.new-workspace-button {
+        background: ${({ theme }) => theme.colors.secondary};
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .4rem;
       }
     }
   }

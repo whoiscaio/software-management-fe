@@ -4,9 +4,19 @@ const AuthContainer = styled.section`
   width: 100%;
 
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   gap: 2rem;
+
+  h1 {
+    color: ${({ theme }) => theme.colors.black};
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 900;
+  }
 
   form {
     background-color: ${({ theme }) => theme.colors.main};
@@ -16,6 +26,7 @@ const AuthContainer = styled.section`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    text-align: center;
 
     width: 100%;
     max-width: 500px;

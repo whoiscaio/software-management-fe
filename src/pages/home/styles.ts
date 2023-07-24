@@ -45,11 +45,14 @@ export const PhaseListContainer = styled.div`
   overflow: auto;
 
   .phase {
+    background: ${({ theme }) => theme.colors.lightGray};
+    border-radius: .6rem;
+
     display: flex;
     flex-direction: column;
     gap: 2rem;
-
-    padding-bottom: 1rem;
+ 
+    padding: 1rem;
 
     border-bottom: 2px solid ${({ theme }) => theme.colors.lightLine};
 
@@ -59,6 +62,11 @@ export const PhaseListContainer = styled.div`
       align-items: center;
 
       button {
+        background: ${({ theme }) => theme.colors.gray};
+        border-radius: .4rem;
+        
+        padding: .4rem;
+
         display: flex;
       }
     }
@@ -68,9 +76,6 @@ export const PhaseListContainer = styled.div`
     }
 
     .process-list {
-      background: ${({ theme }) => theme.colors.lightGray};
-
-      border-radius: .6rem;
 
       display: flex;
       flex-direction: column;
@@ -81,7 +86,7 @@ export const PhaseListContainer = styled.div`
 
       .process-button {
         color: ${({ theme }) => theme.colors.black};
-        background: ${({ theme }) => theme.colors.gray};
+        background: ${({ theme }) => theme.colors.white};
         border-radius: .3rem;
 
         display: flex;
@@ -91,12 +96,12 @@ export const PhaseListContainer = styled.div`
         font-size: 1.2rem;
         text-align: left;
 
-        padding: .4rem;
+        padding: .8rem;
 
         box-shadow: 0;
 
         &:hover {
-          background: ${({ theme }) => theme.colors.darkGray};
+          background: ${({ theme }) => theme.colors.lightGray};
         }
 
         > p {
