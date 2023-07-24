@@ -6,6 +6,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 import { TeamContext } from '../../../contexts/TeamContext';
 import Logo from '../Logo';
+import FormModal from '../dialogs/FormModal';
 
 export default function MainSidebar() {
   const { account, isAuthenticated, logout } = useContext(AuthContext);
@@ -15,6 +16,8 @@ export default function MainSidebar() {
   const selectTrigger = useRef<HTMLDivElement>(null);
 
   const [isSelectMenuOpen, setIsSelectMenuOpen] = useState<boolean>(false);
+  const [isCreateTeamFormOpen, setIsCreateTeamFormOpen] = useState<boolean>(false);
+  const [isCreateWorkspaceFormOpen, setIsCreateWorkspaceFormOpen] = useState<boolean>(false);
 
   function handleLogout() {
     workspaceReset();
@@ -30,8 +33,16 @@ export default function MainSidebar() {
     setIsSelectMenuOpen(false);
   }
 
-  function handleCreateWorkspace() {
+  async function handleCreateWorkspace(name: string, description?: string) {
     console.log('HANDLE CREATE WORKSPACE');
+
+    setIsCreateWorkspaceFormOpen(false);
+  }
+
+  async function handleCreateTeam(name: string, description?: string) {
+    console.log('HANDLE CREATE TEAM');
+
+    setIsCreateTeamFormOpen(false);
   }
 
   useEffect(() => {
@@ -53,76 +64,102 @@ export default function MainSidebar() {
   }, [selectedTeam, handleSetWorkspaces]);
 
   return (
-    <MainSidebarContainer>
-      <Logo />
-      {
-        isAuthenticated && account && account.username && (
-          <div className="action-section">
-            <button type="button" className="new-team-button button-pattern-measures scale-down-hover-effect">
-              <Plus /> <span>Novo Time</span>
-            </button>
-            {
-              account.teams && account.teams.length > 0 && (
-                <div className={`select-team ${isSelectMenuOpen ? 'open' : ''}`}>
-                  <div
-                    className="select-trigger"
-                    ref={selectTrigger}
-                    onClick={() => setIsSelectMenuOpen((prevState) => !prevState)}
-                  >
-                    <p>{selectedTeam?.name || 'Selecione seu time'}</p>
-                    {isSelectMenuOpen ? <ChevronUp /> : <ChevronDown />}
-                    {
-                      isSelectMenuOpen && (
-                        <div className="select-options">
-                          {
-                            account.teams.map((team) => (
-                              <div className="option" key={team.id} onClick={(e) => handleSelectTeam(e, team.id)}>
-                                <p>{team.name}</p>
-                              </div>
-                            ))
-                          }
-                        </div>
-                      )
-                    }
+    <>
+      <MainSidebarContainer>
+        <Logo />
+        {
+          isAuthenticated && account && account.username && (
+            <div className="action-section">
+              <button
+                type="button"
+                onClick={() => setIsCreateTeamFormOpen(true)}
+                className="new-team-button button-pattern-measures scale-down-hover-effect"
+              >
+                <Plus /> <span>Novo Time</span>
+              </button>
+              {
+                account.teams && account.teams.length > 0 && (
+                  <div className={`select-team ${isSelectMenuOpen ? 'open' : ''}`}>
+                    <div
+                      className="select-trigger"
+                      ref={selectTrigger}
+                      onClick={() => setIsSelectMenuOpen((prevState) => !prevState)}
+                    >
+                      <p>{selectedTeam?.name || 'Selecione seu time'}</p>
+                      {isSelectMenuOpen ? <ChevronUp /> : <ChevronDown />}
+                      {
+                        isSelectMenuOpen && (
+                          <div className="select-options">
+                            {
+                              account.teams.map((team) => (
+                                <div className="option" key={team.id} onClick={(e) => handleSelectTeam(e, team.id)}>
+                                  <p>{team.name}</p>
+                                </div>
+                              ))
+                            }
+                          </div>
+                        )
+                      }
+                    </div>
                   </div>
-                </div>
-              )
-            }
-            <div className="workspaces">
-              {
-                workspaces && workspaces.length > 0 && workspaces.map((workspace) => (
-                  <button
-                    key={workspace.id}
-                    type="button"
-                    className={`button-pattern-measures ${selectedWorkspace.id === workspace.id ? 'selected' : ''}`}
-                    onClick={() => selectWorkspace(workspace.id)}
-                  >{workspace.name}</button>
-                ))
-              }
-              {
-                selectedTeam && selectedTeam.name && (
-                  <button
-                    type="button"
-                    onClick={handleCreateWorkspace}
-                    className="new-workspace-button button-pattern-measures"
-                  ><Plus size={30} /> Novo Workspace</button>
                 )
               }
+              <div className="workspaces">
+                {
+                  workspaces && workspaces.length > 0 && workspaces.map((workspace) => (
+                    <button
+                      key={workspace.id}
+                      type="button"
+                      className={`button-pattern-measures ${selectedWorkspace.id === workspace.id ? 'selected' : ''}`}
+                      onClick={() => selectWorkspace(workspace.id)}
+                    >{workspace.name}</button>
+                  ))
+                }
+                {
+                  selectedTeam && selectedTeam.name && (
+                    <button
+                      type="button"
+                      onClick={() => setIsCreateWorkspaceFormOpen(true)}
+                      className="new-workspace-button button-pattern-measures"
+                    ><Plus size={30} /> Novo Workspace</button>
+                  )
+                }
+              </div>
             </div>
-          </div>
+          )
+        }
+        {
+          isAuthenticated && account && account.username && (
+            <div className="profile-footer">
+              <div className="user">
+                <User2 size={40} />
+                <p>Olá, {account.username}</p>
+              </div>
+              <button className="logout" onClick={handleLogout}><LogOut size={30} /></button>
+            </div>
+          )
+        }
+      </MainSidebarContainer>
+      {
+        isCreateTeamFormOpen && (
+          <FormModal
+            action={handleCreateTeam}
+            close={() => setIsCreateTeamFormOpen(false)}
+            title="Criar time"
+            confirmButtonText="Criar time"
+          />
         )
       }
       {
-        isAuthenticated && account && account.username && (
-          <div className="profile-footer">
-            <div className="user">
-              <User2 size={40} />
-              <p>Olá, {account.username}</p>
-            </div>
-            <button className="logout" onClick={handleLogout}><LogOut size={30} /></button>
-          </div>
+        isCreateWorkspaceFormOpen && (
+          <FormModal
+            action={handleCreateWorkspace}
+            close={() => setIsCreateWorkspaceFormOpen(false)}
+            title="Criar workspace"
+            confirmButtonText="Criar workspace"
+          />
         )
       }
-    </MainSidebarContainer>
+    </>
   );
 }
