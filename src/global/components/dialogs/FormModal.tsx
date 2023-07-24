@@ -14,7 +14,7 @@ export default function FormModal({ title, action, close, confirmButtonText }: F
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
 
-  const { getErrors, setError, cleanErrorsByFieldname, cleanAllErrors } = useFormErrors();
+  const { getErrors, setError, cleanErrorsByFieldname } = useFormErrors();
 
   function validateName() {
     if (!name) {
