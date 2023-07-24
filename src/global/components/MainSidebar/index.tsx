@@ -76,7 +76,7 @@ export default function MainSidebar() {
                         <div className="select-options">
                           {
                             account.teams.map((team) => (
-                              <div className="option" onClick={(e) => handleSelectTeam(e, team.id)}>
+                              <div className="option" key={team.id} onClick={(e) => handleSelectTeam(e, team.id)}>
                                 <p>{team.name}</p>
                               </div>
                             ))
@@ -92,6 +92,7 @@ export default function MainSidebar() {
               {
                 workspaces && workspaces.length > 0 && workspaces.map((workspace) => (
                   <button
+                    key={workspace.id}
                     type="button"
                     className={`button-pattern-measures ${selectedWorkspace.id === workspace.id ? 'selected' : ''}`}
                     onClick={() => selectWorkspace(workspace.id)}

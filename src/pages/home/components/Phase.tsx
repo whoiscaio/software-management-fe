@@ -24,11 +24,15 @@ export default function Phase({ phase }: PhaseProps) {
     <div className="phase" key={phase.id}>
       <header>
         <h3>{phase.name}</h3>
-        <button type="button" onClick={handleDeletePhase}><X color="#000000" size={30} /></button>
+        <button
+          type="button"
+          className="scale-down-hover-effect"
+          onClick={handleDeletePhase}
+        ><X color="#000000" size={30} /></button>
       </header>
       <div className="process-list">
         {
-          phase.processes && phase.processes.length > 0 ? phase.processes?.map((process) => <Process process={process} />) : (
+          phase.processes && phase.processes.length > 0 ? phase.processes?.map((process) => <Process key={process.id} process={process} />) : (
             <p>Essa fase não possui nenhum processo.</p>
           )
         }

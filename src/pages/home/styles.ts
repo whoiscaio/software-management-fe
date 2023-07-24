@@ -100,6 +100,12 @@ export const PhaseListContainer = styled.div`
 
         box-shadow: 0;
 
+        cursor: pointer;
+
+        &, * {
+          cursor: pointer;
+        }
+
         &:hover {
           background: ${({ theme }) => theme.colors.lightGray};
         }
