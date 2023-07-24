@@ -9,11 +9,13 @@ type FormModalProps = {
   action: (text1: string, text2?: string) => Promise<void>,
   close: () => void,
   confirmButtonText: string,
+  text1?: string,
+  text2?: string
 };
 
-export default function FormModal({ title, action, close, confirmButtonText }: FormModalProps) {
-  const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+export default function FormModal({ title, action, close, confirmButtonText, text1, text2 }: FormModalProps) {
+  const [name, setName] = useState<string>(text1 || '');
+  const [description, setDescription] = useState<string>(text2 || '');
 
   const { getErrors, setError, cleanErrorsByFieldname } = useFormErrors();
 

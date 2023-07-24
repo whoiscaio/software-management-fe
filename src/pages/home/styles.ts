@@ -47,64 +47,6 @@ export const PhaseListContainer = styled.div`
   gap: 1rem;
 
   overflow: auto;
-
-  .phase {
-    background: ${({ theme }) => theme.colors.lightGray};
-    border-radius: .6rem;
-
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
- 
-    padding: 1rem;
-
-    border-bottom: 2px solid ${({ theme }) => theme.colors.lightLine};
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      button {
-        background: ${({ theme }) => theme.colors.gray};
-        border-radius: .4rem;
-        
-        padding: .4rem;
-
-        display: flex;
-      }
-    }
-
-    h3 {
-      font-size: 2rem;
-    }
-
-    .process-list {
-
-      display: flex;
-      flex-direction: column;
-
-      padding: .6rem;
-
-      gap: .4rem;
-    }
-
-    .action {
-      display: flex;
-      gap: 1rem;
-      justify-content: flex-end;
-
-      button {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-
-        &:first-of-type {
-          background: ${({ theme }) => theme.colors.main};
-        }
-      }
-    }
-  }
 `;
 
 export const PhaseContainer = styled.div`
@@ -197,8 +139,12 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
 
     padding: .8rem;
 
+    cursor: pointer;
+
     > p {
       flex: 1;
+
+      cursor: pointer;
     }
 
     &:hover {
@@ -226,12 +172,6 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
         background: ${({ theme }) => theme.colors.gray};
       }
     }
-  }
-
-  cursor: pointer;
-
-  &, * {
-    cursor: pointer;
   }
 
   .tag {

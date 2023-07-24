@@ -56,6 +56,8 @@ export default function Subprocess({ subprocess }: SubprocessProps) {
             close={() => setIsEditFormOpen(false)}
             title="Editar subprocesso"
             confirmButtonText="Editar subprocesso"
+            text1={subprocess.name}
+            text2={subprocess.description}
           />
         )
       }
