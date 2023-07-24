@@ -1,7 +1,8 @@
-import { Box, FormModalContainer, Overlay } from './styles';
-import Field from '../Field';
+
 import { FormEvent, useState } from 'react';
 import useFormErrors from '../../../hooks/useFormErrors';
+import { Box, FormModalContainer, Overlay } from './styles';
+import Field from '../Field';
 
 type FormModalProps = {
   title: string,
@@ -38,7 +39,7 @@ export default function FormModal({ title, action, close, confirmButtonText }: F
 
   return (
     <Overlay>
-      <Box bg="main">
+      <Box $bg="main">
         <FormModalContainer onSubmit={handleSubmit}>
           <header>
             <h2>{title}</h2>

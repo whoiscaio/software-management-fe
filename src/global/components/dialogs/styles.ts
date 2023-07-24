@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 type BoxProps = {
-  bg?: 'white' | 'main'
+  $bg?: 'white' | 'main'
 }
 
 export const Overlay = styled.div`
@@ -22,7 +22,7 @@ export const Box = styled.div<BoxProps>`
   width: 80%;
   max-width: 400px;
 
-  background: ${({ theme, bg }) => theme.colors[bg || 'white']};
+  background: ${({ theme, $bg }) => theme.colors[$bg || 'white']};
   border-radius: .4rem;
 
   padding: 1rem;
@@ -84,10 +84,11 @@ export const FormModalContainer = styled.form`
   gap: 2rem;
 
   header {
-    text-align: center;
+    display: flex;
+    justify-content: center;
 
     h2 {
-      font-size: 2.4rem;
+      font-size: 2rem;
       color: ${({ theme }) => theme.colors.white};
     }
   }
