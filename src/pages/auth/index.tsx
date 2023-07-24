@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
 import AuthContainer from './styles';
-import Field from './components/Field';
+import Field from '../../global/components/Field';
 import { useNavigate } from 'react-router-dom';
 import Page from '../../global/components/Page';
 import useFormErrors from '../../hooks/useFormErrors';

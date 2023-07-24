@@ -23,6 +23,7 @@ const GlobalStyles = createGlobalStyle`
   input,
   textarea,
   select {
+    font-family: inherit;
     outline: none;
   }
 
@@ -69,7 +70,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.white};
   }
 
-  input::placeholder {
+  input::placeholder, textarea::placeholder {
     color: ${({ theme }) => theme.colors.white}88;
   }
 

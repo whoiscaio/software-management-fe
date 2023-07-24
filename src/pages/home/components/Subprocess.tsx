@@ -1,7 +1,7 @@
 import { Edit, Trash } from 'lucide-react';
 import { ISubprocess } from '../../../types/mainTypes';
 import { useState } from 'react';
-import Dialog from '../../../global/components/Dialog';
+import Dialog from '../../../global/components/dialogs/Dialog';
 
 type SubprocessProps = {
   subprocess: ISubprocess;
@@ -11,11 +11,11 @@ export default function Subprocess({ subprocess }: SubprocessProps) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
 
   function handleEditSubprocess() {
-    console.log('HANDLE EDIT SUBPROCESS')
+    console.log('HANDLE EDIT SUBPROCESS');
   }
 
   function handleDeleteSubprocess() {
-    console.log('HANDLE DELETE SUBPROCESS')
+    console.log('HANDLE DELETE SUBPROCESS');
 
     setIsDeleteDialogOpen(false);
   }

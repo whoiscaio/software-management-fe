@@ -3,7 +3,7 @@ import { IPhase } from '../../../types/mainTypes';
 import Process from './Process';
 import { useState } from 'react';
 import { PhaseContainer } from '../styles';
-import Dialog from '../../../global/components/Dialog';
+import Dialog from '../../../global/components/dialogs/Dialog';
 
 type PhaseProps = {
   phase: IPhase;

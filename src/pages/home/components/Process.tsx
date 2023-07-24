@@ -3,7 +3,7 @@ import { IProcess } from '../../../types/mainTypes';
 import Subprocess from './Subprocess';
 import { MouseEvent, useMemo, useState } from 'react';
 import { ProcessContainer } from '../styles';
-import Dialog from '../../../global/components/Dialog';
+import Dialog from '../../../global/components/dialogs/Dialog';
 
 type ProcessProps = {
   process: IProcess;

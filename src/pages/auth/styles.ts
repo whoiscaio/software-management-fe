@@ -77,23 +77,4 @@ const AuthContainer = styled.section`
   }
 `;
 
-export const FieldContainer = styled.div`
-
-  input {
-    background: ${({ theme }) => theme.colors.lightMain};
-    border-radius: .2rem;
-
-    width: 100%;
-    font-size: 1.2rem;
-
-    padding: .8rem 1rem;
-  }
-
-  .error-message {
-    color: ${({ theme }) => theme.colors.error};
-
-    margin-top: .4rem;
-  }
-`;
-
 export default AuthContainer;
