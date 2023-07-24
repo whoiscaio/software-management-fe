@@ -13,6 +13,12 @@ export default function Process({ process }: ProcessProps) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [isSubprocessListOpen, setIsSubprocessListOpen] = useState<boolean>(false);
 
+  function handleToggleSubprocessList() {
+    if (!process.subprocesses || process.subprocesses.length < 1) return;
+
+    setIsSubprocessListOpen((prevState) => !prevState);
+  }
+
   function handleOpenDeleteDialog(e: MouseEvent) {
     e.stopPropagation();
     setIsDeleteDialogOpen(true);
@@ -35,7 +41,7 @@ export default function Process({ process }: ProcessProps) {
   return (
     <>
       <ProcessContainer className={`process-button ${isSubprocessListOpen ? 'open' : ''}`} openSize={openSize}>
-        <div className="main-process process-item" onClick={() => setIsSubprocessListOpen((prevState) => !prevState)}>
+        <div className="main-process process-item" onClick={handleToggleSubprocessList}>
           <div className="tag button-pattern-measures contrast-button">Em andamento</div>
           <p>{process.name}</p>
           <div className="actions">
