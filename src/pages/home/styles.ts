@@ -1,5 +1,9 @@
 import { styled } from 'styled-components';
 
+type ProcessContainerProps = {
+  openSize: number;
+}
+
 const HomePageContainer = styled.section`
   width: 100%;
   padding: 2rem;
@@ -83,57 +87,6 @@ export const PhaseListContainer = styled.div`
       padding: .6rem;
 
       gap: .4rem;
-
-      .process-button {
-        color: ${({ theme }) => theme.colors.black};
-        background: ${({ theme }) => theme.colors.white};
-        border-radius: .3rem;
-
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-
-        font-size: 1.2rem;
-        text-align: left;
-
-        padding: .8rem;
-
-        box-shadow: 0;
-
-        cursor: pointer;
-
-        &, * {
-          cursor: pointer;
-        }
-
-        &:hover {
-          background: ${({ theme }) => theme.colors.lightGray};
-        }
-
-        > p {
-          flex: 1;
-        }
-
-        .tag {
-          color: ${({ theme }) => theme.colors.white};
-
-          box-shadow: 0;
-        }
-
-        .actions {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-
-          button {
-            transition: transform .12s ease;
-
-            &:hover {
-              transform: scale(1.05);
-            }
-          }
-        }
-      }
     }
 
     .action {
@@ -149,6 +102,86 @@ export const PhaseListContainer = styled.div`
         &:first-of-type {
           background: ${({ theme }) => theme.colors.main};
         }
+      }
+    }
+  }
+`;
+
+export const ProcessContainer = styled.div<ProcessContainerProps>`
+  color: ${({ theme }) => theme.colors.black};
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: .3rem;
+
+  height: 61px;
+
+  overflow: hidden;
+
+  font-size: 1.2rem;
+  text-align: left;
+
+  box-shadow: 0;
+
+  transition: height .12s ease;
+
+  &.open {
+    height: ${({ openSize }) => `${openSize}px`};
+  }
+
+  .process-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    height: 61px;
+
+    padding: .8rem;
+
+    > p {
+      flex: 1;
+    }
+
+    &:hover {
+      background: ${({ theme }) => theme.colors.lightGray};
+    }
+  }
+
+  .subprocess-list {
+    background: ${({ theme }) => theme.colors.lightGray};
+    border-radius: .6rem;
+
+    margin: 0 3rem;
+
+    .process-item {
+      border-radius: .4rem;
+
+      &:hover {
+        background: ${({ theme }) => theme.colors.gray};
+      }
+    }
+  }
+
+  cursor: pointer;
+
+  &, * {
+    cursor: pointer;
+  }
+
+  .tag {
+    color: ${({ theme }) => theme.colors.white};
+
+    box-shadow: 0;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    button {
+      transition: transform .12s ease;
+
+      &:hover {
+        transform: scale(1.05);
       }
     }
   }

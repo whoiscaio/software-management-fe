@@ -20,6 +20,8 @@ export default function Phase({ phase }: PhaseProps) {
     console.log('CREATE NEW PROCESS');
   }
 
+  console.log(phase);
+
   return (
     <div className="phase" key={phase.id}>
       <header>
