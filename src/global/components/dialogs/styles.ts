@@ -25,10 +25,6 @@ export const Box = styled.div<BoxProps>`
   background: ${({ theme, bg }) => theme.colors[bg || 'white']};
   border-radius: .4rem;
 
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-
   padding: 1rem;
 
   .cancel-button {
@@ -43,6 +39,10 @@ export const Box = styled.div<BoxProps>`
 `;
 
 export const DialogContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+
   h2 {
     color: ${({ theme }) => theme.colors.black};
   }
