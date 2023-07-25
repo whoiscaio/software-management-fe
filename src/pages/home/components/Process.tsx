@@ -45,7 +45,7 @@ export default function Process({ process, phaseId, phases }: ProcessProps) {
       name,
       description: description || '',
       process_id: process.id,
-      concluded: process.concluded
+      concluded: false
     };
 
     await SubprocessService.create(body, token);

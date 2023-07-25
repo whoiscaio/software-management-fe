@@ -54,8 +54,8 @@ export default function Subprocess({ subprocess, processId }: SubprocessProps) {
   return (
     <>
       <div className="subprocess-button">
-        <div className="main-process process-item">
-          <Checkbox checked={subprocess.concluded} action={handleToggleSubprocessState} />
+        <div className="main-process process-item" onClick={handleToggleSubprocessState}>
+          <Checkbox checked={subprocess.concluded} />
           <p>{subprocess.name}</p>
           <div className="actions">
             <button type="button" onClick={() => setIsDeleteDialogOpen(true)}><Trash color="#DD0000" size={25} /></button>

@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 
 type CheckboxProps = {
   checked: boolean;
-  action: (e: MouseEvent) => void;
+  action?: (e: MouseEvent) => void;
 };
 
 const CheckboxContainer = styled.div`
