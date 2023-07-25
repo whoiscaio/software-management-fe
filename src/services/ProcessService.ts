@@ -2,12 +2,24 @@ import { AxiosError } from 'axios';
 import { HttpClient } from './utils/HttpClient';
 import handleEmitError from '../global/utils/handleEmitError';
 import { toast } from 'react-toastify';
+import { ProcessDTO } from '../types/mainTypes';
 
 class ProcessService {
   private httpClient: HttpClient;
 
   constructor() {
     this.httpClient = new HttpClient('/processes');
+  }
+
+  async create(phaseDTO: ProcessDTO, token: string) {
+    const response = await this.httpClient.post('', phaseDTO, token);
+
+    if (response instanceof AxiosError) {
+      handleEmitError(response.response?.data.message);
+      return;
+    }
+
+    return;
   }
 
   async delete(id: string, token: string) {

@@ -6,17 +6,28 @@ import { WorkspaceContext } from '../../contexts/WorkspaceContext';
 import PhaseList from './components/PhaseList';
 import { Plus } from 'lucide-react';
 import FormModal from '../../global/components/dialogs/FormModal';
+import PhaseService from '../../services/PhaseService';
+import { PhaseDTO } from '../../types/mainTypes';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Home() {
+  const { token } = useContext(AuthContext);
   const { selectedTeam } = useContext(TeamContext);
-  const { selectedWorkspace } = useContext(WorkspaceContext);
+  const { selectedWorkspace, update } = useContext(WorkspaceContext);
 
   const [isCreatePhaseFormOpen, setIsCreatePhaseFormOpen] = useState<boolean>(false);
 
   async function handleCreatePhase(name: string, description?: string) {
-    console.log('CREATE NEW PHASE');
+    const body: PhaseDTO = {
+      name,
+      description: description || '',
+      workspace_id: selectedWorkspace.id
+    };
+
+    await PhaseService.create(body, token);
 
     setIsCreatePhaseFormOpen(false);
+    update();
   }
 
   return (

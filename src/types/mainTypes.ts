@@ -1,3 +1,21 @@
+export interface SubprocessDTO {
+  name: string;
+  description: string;
+  process_id: string;
+}
+
+export interface ProcessDTO {
+  name: string;
+  description: string;
+  phase_id: string;
+}
+
+export interface PhaseDTO {
+  name: string;
+  description: string;
+  workspace_id: string;
+}
+
 export interface ISubprocess {
   id: string;
   name: string;

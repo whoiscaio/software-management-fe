@@ -1,5 +1,5 @@
 import { Edit, Plus, X } from 'lucide-react';
-import { IPhase } from '../../../types/mainTypes';
+import { IPhase, PhaseDTO, ProcessDTO } from '../../../types/mainTypes';
 import Process from './Process';
 import { useContext, useState } from 'react';
 import { PhaseContainer } from '../styles';
@@ -8,6 +8,7 @@ import FormModal from '../../../global/components/dialogs/FormModal';
 import PhaseService from '../../../services/PhaseService';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 import { AuthContext } from '../../../contexts/AuthContext';
+import ProcessService from '../../../services/ProcessService';
 
 type PhaseProps = {
   phase: IPhase;
@@ -15,14 +16,23 @@ type PhaseProps = {
 
 export default function Phase({ phase }: PhaseProps) {
   const { token } = useContext(AuthContext);
-  const { update } = useContext(WorkspaceContext);
+  const { selectedWorkspace, update } = useContext(WorkspaceContext);
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [isEditPhaseFormOpen, setIsEditPhaseFormOpen] = useState<boolean>(false);
   const [isCreateProcessFormOpen, setIsCreateProcessFormOpen] = useState<boolean>(false);
 
   async function handleEditPhase(name: string, description?: string) {
-    console.log('HANDLE EDIT PHASE');
+    const body: PhaseDTO = {
+      name,
+      description: description || '',
+      workspace_id: selectedWorkspace.id
+    };
+
+    await PhaseService.update(phase.id, body, token);
+
+    setIsCreateProcessFormOpen(false);
+    update();
 
     setIsEditPhaseFormOpen(false);
   }
@@ -34,9 +44,16 @@ export default function Phase({ phase }: PhaseProps) {
   }
 
   async function handleCreateProcess(name: string, description?: string) {
-    console.log('CREATE NEW PROCESS');
+    const body: ProcessDTO = {
+      name,
+      description: description || '',
+      phase_id: phase.id
+    };
 
-    setIsCreateProcessFormOpen(false)
+    await ProcessService.create(body, token);
+
+    setIsCreateProcessFormOpen(false);
+    update();
   }
 
   return (

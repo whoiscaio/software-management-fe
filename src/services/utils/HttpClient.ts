@@ -26,7 +26,21 @@ export class HttpClient {
     try {
       const response = await axios.post(`${this.baseURL}${uri}`, body, {
         headers: {
-          Authorization: token ? `Bearer ${token}` : undefined
+          Authorization: token ? `Bearer ${token}` : undefined,
+        }
+      });
+
+      return response;
+    } catch (error) {
+      return error as AxiosError<IApiError>;
+    }
+  }
+
+  async put(id: string, body: any, token?: string) {
+    try {
+      const response = await axios.put(`${this.baseURL}/${id}`, body, {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : undefined,
         }
       });
 
