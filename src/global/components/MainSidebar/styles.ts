@@ -22,6 +22,30 @@ const MainSidebarContainer = styled.aside`
 
     gap: 1rem;
 
+    overflow: hidden;
+
+    button {
+      background: ${({ theme }) => theme.colors.lightMain};
+      border-radius: .4rem;
+
+      &.selected {
+        background: ${({ theme }) => theme.colors.darkMain};
+      }
+
+      &:not(.new-workspace-button):hover {
+        opacity: .8;
+      }
+
+      &.new-workspace-button {
+        background: ${({ theme }) => theme.colors.secondary};
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .4rem;
+      }
+    }
+
     .new-team-button {
       background: ${({ theme }) => theme.colors.white};
       border-radius: .4rem;
@@ -61,8 +85,6 @@ const MainSidebarContainer = styled.aside`
   .select-team {
     background: ${({ theme }) => theme.colors.white};
     border-radius: .4rem;
-
-    margin-bottom: 1rem;
 
     &.open {
       border-bottom-left-radius: 0;
@@ -127,27 +149,7 @@ const MainSidebarContainer = styled.aside`
 
     gap: 1rem;
 
-    button {
-      background: ${({ theme }) => theme.colors.lightMain};
-      border-radius: .4rem;
-
-      &.selected {
-        background: ${({ theme }) => theme.colors.darkMain};
-      }
-
-      &:not(.new-workspace-button):hover {
-        opacity: .8;
-      }
-
-      &.new-workspace-button {
-        background: ${({ theme }) => theme.colors.secondary};
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: .4rem;
-      }
-    }
+    overflow: auto;
   }
 `;
 

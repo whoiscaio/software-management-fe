@@ -142,7 +142,8 @@ export default function MainSidebar() {
                     >{workspace.name}</button>
                   ))
                 }
-                {
+              </div>
+              {
                   selectedTeam && selectedTeam.name && (
                     <button
                       type="button"
@@ -151,7 +152,6 @@ export default function MainSidebar() {
                     ><Plus size={30} /> Novo Workspace</button>
                   )
                 }
-              </div>
             </div>
           )
         }
