@@ -115,7 +115,7 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
   display: flex;
   flex-direction: column;
 
-  height: 61px;
+  height: 54px;
 
   overflow: hidden;
 
@@ -135,7 +135,7 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
     align-items: center;
     gap: 1rem;
 
-    height: 61px;
+    height: 54px;
 
     padding: .8rem;
 

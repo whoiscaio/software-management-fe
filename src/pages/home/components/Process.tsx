@@ -9,6 +9,7 @@ import ProcessService from '../../../services/ProcessService';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 import SubprocessService from '../../../services/SubprocessService';
+import Checkbox from '../../../global/components/Checkbox';
 
 type ProcessProps = {
   process: IProcess;
@@ -74,22 +75,14 @@ export default function Process({ process, phaseId, phases }: ProcessProps) {
   }
 
   const openSize = useMemo(() => (
-    61 * process.subprocesses.length + 150
+    54 * process.subprocesses.length + 150
   ), [process.subprocesses.length]);
 
   return (
     <>
       <ProcessContainer className={`process-button ${isSubprocessListOpen ? 'open' : ''}`} openSize={openSize}>
         <div className="main-process process-item" onClick={handleToggleSubprocessList}>
-          {
-            process.concluded
-              ? (
-                <div className="tag concluded button-pattern-measures contrast-button">Concluída</div>
-              )
-              : (
-                <div className="tag button-pattern-measures contrast-button">Em andamento</div>
-              )
-          }
+          <Checkbox checked={process.concluded} />
           <p>{process.name}</p>
           <div className="actions">
             <button type="button" onClick={handleOpenDeleteDialog}><Trash color="#DD0000" size={25} /></button>

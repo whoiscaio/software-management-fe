@@ -6,6 +6,7 @@ import FormModal from '../../../global/components/dialogs/FormModal';
 import SubprocessService from '../../../services/SubprocessService';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
+import Checkbox from '../../../global/components/Checkbox';
 
 type SubprocessProps = {
   subprocess: ISubprocess;
@@ -43,7 +44,7 @@ export default function Subprocess({ subprocess, processId }: SubprocessProps) {
     <>
       <div className="subprocess-button">
         <div className="main-process process-item">
-          <div className="tag button-pattern-measures contrast-button">Em andamento</div>
+          <Checkbox checked={subprocess.concluded} />
           <p>{subprocess.name}</p>
           <div className="actions">
             <button type="button" onClick={() => setIsDeleteDialogOpen(true)}><Trash color="#DD0000" size={25} /></button>
