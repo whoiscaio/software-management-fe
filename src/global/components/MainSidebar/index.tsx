@@ -10,11 +10,13 @@ import FormModal from '../dialogs/FormModal';
 import TeamService from '../../../services/TeamService';
 import { TeamDTO } from '../../../types/teamTypes';
 import { toast } from 'react-toastify';
+import WorkspaceService from '../../../services/WorkspaceService';
+import { WorkspaceDTO } from '../../../types/workspaceTypes';
 
 export default function MainSidebar() {
   const { account, isAuthenticated, token, logout } = useContext(AuthContext);
   const { teams, selectedTeam, selectTeam, addNewTeam, reset: teamReset } = useContext(TeamContext);
-  const { workspaces, selectedWorkspace, handleSetWorkspaces, selectWorkspace, reset: workspaceReset } = useContext(WorkspaceContext);
+  const { workspaces, selectedWorkspace, addNewWorkspace, handleSetWorkspaces, selectWorkspace, reset: workspaceReset } = useContext(WorkspaceContext);
 
   const selectTrigger = useRef<HTMLDivElement>(null);
 
@@ -37,7 +39,19 @@ export default function MainSidebar() {
   }
 
   async function handleCreateWorkspace(name: string, description?: string) {
-    console.log('HANDLE CREATE WORKSPACE');
+    const body: WorkspaceDTO = {
+      name,
+      description: description || '',
+      team_id: selectedTeam.id
+    };
+
+    const response = await WorkspaceService.createWorkspace(body, token);
+
+    if (!response?.data) return;
+
+    addNewWorkspace(response.data);
+
+    toast(`Workspace ${name} criado com sucesso.`);
 
     setIsCreateWorkspaceFormOpen(false);
   }

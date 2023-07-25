@@ -1,6 +1,12 @@
 import { IPhase } from './mainTypes';
 import { ISimpleTeam } from './teamTypes';
 
+export interface WorkspaceDTO {
+  name: string;
+  description: string;
+  team_id: string;
+}
+
 export interface ISimpleWorkspace {
   id: string;
   name: string;
