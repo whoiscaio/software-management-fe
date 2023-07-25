@@ -9,6 +9,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { TeamContext } from '../../contexts/TeamContext';
 import decode from '../../global/utils/decode';
 import Logo from '../../global/components/Logo';
+import { toast } from 'react-toastify';
 
 type AuthProps = {
   as: 'login' | 'signup';
@@ -116,6 +117,7 @@ export default function Auth({ as }: AuthProps) {
     if (response) {
       resetState();
       navigate('/login');
+      toast('Cadastro realizado com sucesso.');
     }
 
     return;
