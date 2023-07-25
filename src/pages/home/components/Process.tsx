@@ -103,7 +103,7 @@ export default function Process({ process, phaseId, phases }: ProcessProps) {
         <div className="subprocesses-wrapper">
           <div className="subprocess-list">
             {
-              process.subprocesses && process.subprocesses.length > 0 && process.subprocesses.map((subprocess) => (
+              process.subprocesses && process.subprocesses.length > 0 && process.subprocesses.sort((a, b) => a.order - b.order).map((subprocess) => (
                 <Subprocess subprocess={subprocess} processId={process.id} />
               ))
             }

@@ -71,7 +71,7 @@ export default function Phase({ phase, phases }: PhaseProps) {
           {
             phase.processes &&
               phase.processes.length > 0
-              ? phase.processes?.map((process) => (
+              ? phase.processes?.sort((a, b) => a.order - b.order).map((process) => (
                 <Process key={process.id} phaseId={phase.id} phases={phases} process={process} />
               ))
               : (
