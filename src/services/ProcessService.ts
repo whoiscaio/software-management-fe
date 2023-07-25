@@ -11,8 +11,19 @@ class ProcessService {
     this.httpClient = new HttpClient('/processes');
   }
 
-  async create(phaseDTO: ProcessDTO, token: string) {
-    const response = await this.httpClient.post('', phaseDTO, token);
+  async create(processDTO: ProcessDTO, token: string) {
+    const response = await this.httpClient.post('', processDTO, token);
+
+    if (response instanceof AxiosError) {
+      handleEmitError(response.response?.data.message);
+      return;
+    }
+
+    return;
+  }
+
+  async update(id: string, processDTO: ProcessDTO, token: string) {
+    const response = await this.httpClient.put(id, processDTO, token);
 
     if (response instanceof AxiosError) {
       handleEmitError(response.response?.data.message);

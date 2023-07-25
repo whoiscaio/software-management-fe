@@ -1,5 +1,5 @@
 import { Edit, Trash } from 'lucide-react';
-import { IProcess } from '../../../types/mainTypes';
+import { IProcess, ProcessDTO } from '../../../types/mainTypes';
 import Subprocess from './Subprocess';
 import { MouseEvent, useContext, useMemo, useState } from 'react';
 import { ProcessContainer } from '../styles';
@@ -11,9 +11,10 @@ import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 
 type ProcessProps = {
   process: IProcess;
+  phaseId: string;
 };
 
-export default function Process({ process }: ProcessProps) {
+export default function Process({ process, phaseId }: ProcessProps) {
   const { token } = useContext(AuthContext);
   const { update } = useContext(WorkspaceContext);
 
@@ -43,10 +44,17 @@ export default function Process({ process }: ProcessProps) {
     update();
   }
 
-  async function handleEditProcess() {
-    console.log('HANDLE EDIT PROCESS');
+  async function handleEditProcess(name: string, description?: string) {
+    const body: ProcessDTO = {
+      name,
+      description: description || '',
+      phase_id: phaseId
+    };
+
+    await ProcessService.update(process.id, body, token);
 
     setIsEditFormOpen(false);
+    update();
   }
 
   const openSize = useMemo(() => (

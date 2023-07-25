@@ -31,10 +31,8 @@ export default function Phase({ phase }: PhaseProps) {
 
     await PhaseService.update(phase.id, body, token);
 
-    setIsCreateProcessFormOpen(false);
-    update();
-
     setIsEditPhaseFormOpen(false);
+    update();
   }
 
   async function handleDeletePhase() {
@@ -69,9 +67,14 @@ export default function Phase({ phase }: PhaseProps) {
         </header>
         <div className="process-list">
           {
-            phase.processes && phase.processes.length > 0 ? phase.processes?.map((process) => <Process key={process.id} process={process} />) : (
-              <p>Essa fase não possui nenhum processo.</p>
-            )
+            phase.processes &&
+            phase.processes.length > 0
+              ? phase.processes?.map((process) => (
+                <Process key={process.id} phaseId={phase.id} process={process} />
+              ))
+              : (
+                  <p>Essa fase não possui nenhum processo.</p>
+                )
           }
         </div>
         <div className="action">
