@@ -1,4 +1,4 @@
-import { Edit, Trash } from 'lucide-react';
+import { Edit, Plus, Trash } from 'lucide-react';
 import { IPhase, IProcess, ProcessDTO } from '../../../types/mainTypes';
 import Subprocess from './Subprocess';
 import { MouseEvent, useContext, useMemo, useState } from 'react';
@@ -25,8 +25,6 @@ export default function Process({ process, phaseId, phases, concluded }: Process
   const [isEditFormOpen, setIsEditFormOpen] = useState<boolean>(false);
 
   function handleToggleSubprocessList() {
-    if (!process.subprocesses || process.subprocesses.length < 1) return;
-
     setIsSubprocessListOpen((prevState) => !prevState);
   }
 
@@ -60,7 +58,7 @@ export default function Process({ process, phaseId, phases, concluded }: Process
   }
 
   const openSize = useMemo(() => (
-    61 * process.subprocesses.length + 90
+    61 * process.subprocesses.length + 150
   ), [process.subprocesses.length]);
 
   return (
@@ -82,19 +80,18 @@ export default function Process({ process, phaseId, phases, concluded }: Process
             <button type="button" onClick={handleOpenEditForm}><Edit color="#0000BB" size={25} /></button>
           </div>
         </div>
-        {
-          process.subprocesses && process.subprocesses.length > 0 && (
-            <div className="subprocesses-wrapper">
-              <div className="subprocess-list">
-                {
-                  process.subprocesses.map((subprocess) => (
-                    <Subprocess subprocess={subprocess} processId={process.id} />
-                  ))
-                }
-              </div>
-            </div>
-          )
-        }
+        <div className="subprocesses-wrapper">
+          <div className="subprocess-list">
+            {
+              process.subprocesses && process.subprocesses.length > 0 && process.subprocesses.map((subprocess) => (
+                <Subprocess subprocess={subprocess} processId={process.id} />
+              ))
+            }
+          </div>
+          <div className="subprocess-action">
+            <button type="button" className="button-pattern-measures contrast-button scale-down-hover-effect"><Plus /> Novo subprocesso</button>
+          </div>
+        </div>
       </ProcessContainer>
       {
         isDeleteDialogOpen && (

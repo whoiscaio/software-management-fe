@@ -157,6 +157,15 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    gap: 1rem;
+
+    .subprocess-action {
+      display: flex;
+      justify-content: flex-end;
+
+      margin: 0 3rem;
+    }
   }
 
   .subprocess-list {
