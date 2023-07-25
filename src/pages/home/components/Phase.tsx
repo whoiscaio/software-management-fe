@@ -1,5 +1,5 @@
 import { Edit, Plus, X } from 'lucide-react';
-import { IPhase, PhaseDTO, ProcessDTO } from '../../../types/mainTypes';
+import { IPhase, PhaseDTO, ProcessDTO } from '../../../global/types/mainTypes';
 import Process from './Process';
 import { useContext, useState } from 'react';
 import { PhaseContainer } from '../styles';
@@ -70,13 +70,13 @@ export default function Phase({ phase, phases }: PhaseProps) {
         <div className="process-list">
           {
             phase.processes &&
-            phase.processes.length > 0
+              phase.processes.length > 0
               ? phase.processes?.map((process) => (
                 <Process key={process.id} phaseId={phase.id} phases={phases} process={process} />
               ))
               : (
-                  <p>Essa fase não possui nenhum processo.</p>
-                )
+                <p>Essa fase não possui nenhum processo.</p>
+              )
           }
         </div>
         <div className="action">

@@ -23,6 +23,7 @@ export interface ISubprocess {
   name: string;
   description: string;
   concluded: boolean;
+  order: number;
 }
 
 export interface IProcess extends ISubprocess {

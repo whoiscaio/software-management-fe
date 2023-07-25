@@ -7,7 +7,7 @@ import PhaseList from './components/PhaseList';
 import { Plus } from 'lucide-react';
 import FormModal from '../../global/components/dialogs/FormModal';
 import PhaseService from '../../services/PhaseService';
-import { PhaseDTO } from '../../types/mainTypes';
+import { PhaseDTO } from '../../global/types/mainTypes';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Home() {

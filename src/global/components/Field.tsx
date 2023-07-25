@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { IFormError } from '../../types/formError';
+import { IFormError } from '../types/formError';
 import { styled } from 'styled-components';
 
 type FieldProps = {

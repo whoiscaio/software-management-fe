@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { HttpClient } from './utils/HttpClient';
 import handleEmitError from '../global/utils/handleEmitError';
 import { toast } from 'react-toastify';
-import { SubprocessDTO } from '../types/mainTypes';
+import { SubprocessDTO } from '../global/types/mainTypes';
 
 class SubprocessService {
   private httpClient: HttpClient;

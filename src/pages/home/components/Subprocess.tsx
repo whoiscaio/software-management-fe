@@ -1,5 +1,5 @@
 import { Edit, Trash } from 'lucide-react';
-import { ISubprocess, SubprocessDTO } from '../../../types/mainTypes';
+import { ISubprocess, SubprocessDTO } from '../../../global/types/mainTypes';
 import { MouseEvent, useContext, useState } from 'react';
 import Dialog from '../../../global/components/dialogs/Dialog';
 import FormModal from '../../../global/components/dialogs/FormModal';

@@ -9,11 +9,7 @@ export default function PhaseList() {
   return (
     <PhaseListContainer>
       {
-        selectedWorkspace?.phases?.sort((a, b) => {
-          if (a.name === 'Concluídos') return 1;
-          if (b.name === 'Concluídos') return -1;
-          return a.order - b.order;
-        }).map((phase) => (
+        selectedWorkspace?.phases?.sort((a, b) => a.order - b.order).map((phase) => (
           <Phase key={phase.id} phase={phase} phases={selectedWorkspace.phases} />
         ))
       }

@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { IApiError } from '../../types/apiError';
+import { IApiError } from '../../global/types/apiError';
 
 export class HttpClient {
   private baseURL: string;

@@ -3,7 +3,7 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import useFormErrors from '../../../hooks/useFormErrors';
 import { Box, FormModalContainer, Overlay } from './styles';
 import Field from '../Field';
-import { ISimpleTeam } from '../../../types/teamTypes';
+import { ISimpleTeam } from '../../types/teamTypes';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 type FormModalProps = {
@@ -14,7 +14,7 @@ type FormModalProps = {
   text1?: string,
   text2?: string,
   options?: ISimpleTeam[],
-  defaultOption?: ISimpleTeam
+  defaultOption?: ISimpleTeam;
 };
 
 export default function FormModal({ title, action, close, confirmButtonText, text1, text2, options, defaultOption }: FormModalProps) {

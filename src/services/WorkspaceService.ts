@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import handleEmitError from '../global/utils/handleEmitError';
 import { HttpClient } from './utils/HttpClient';
-import { IWorkspace, WorkspaceDTO } from '../types/workspaceTypes';
+import { IWorkspace, WorkspaceDTO } from '../global/types/workspaceTypes';
 
 class WorkspaceService {
   private httpClient: HttpClient;

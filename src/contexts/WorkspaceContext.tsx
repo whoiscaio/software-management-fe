@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { ISimpleWorkspace, IWorkspace } from '../types/workspaceTypes';
+import { ISimpleWorkspace, IWorkspace } from '../global/types/workspaceTypes';
 import { toast } from 'react-toastify';
 import { AuthContext } from './AuthContext';
 import WorkspaceService from '../services/WorkspaceService';

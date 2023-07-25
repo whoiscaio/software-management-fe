@@ -2,7 +2,7 @@
 
 import { ReactNode, createContext, useState } from 'react';
 
-import { IAccount } from '../types/accountTypes';
+import { IAccount } from '../global/types/accountTypes';
 
 interface AuthContextData {
   token: string;
@@ -16,8 +16,8 @@ export const AuthContext = createContext<AuthContextData>({
   token: '',
   account: {} as IAccount,
   isAuthenticated: false,
-  authenticate: () => { },
-  logout: () => { },
+  authenticate: () => {},
+  logout: () => {},
 });
 
 export default function AuthContextProvider({ children }: { children: ReactNode; }) {

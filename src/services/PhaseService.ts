@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { HttpClient } from './utils/HttpClient';
 import handleEmitError from '../global/utils/handleEmitError';
 import { toast } from 'react-toastify';
-import { PhaseDTO } from '../types/mainTypes';
+import { PhaseDTO } from '../global/types/mainTypes';
 
 class PhaseService {
   private httpClient: HttpClient;

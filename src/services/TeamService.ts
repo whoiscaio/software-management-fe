@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import handleEmitError from '../global/utils/handleEmitError';
 import { HttpClient } from './utils/HttpClient';
-import { ITeam, TeamDTO } from '../types/teamTypes';
+import { ITeam, TeamDTO } from '../global/types/teamTypes';
 
 class TeamService {
   private httpClient: HttpClient;

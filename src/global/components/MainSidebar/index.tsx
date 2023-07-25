@@ -8,10 +8,10 @@ import { TeamContext } from '../../../contexts/TeamContext';
 import Logo from '../Logo';
 import FormModal from '../dialogs/FormModal';
 import TeamService from '../../../services/TeamService';
-import { TeamDTO } from '../../../types/teamTypes';
+import { TeamDTO } from '../../types/teamTypes';
 import { toast } from 'react-toastify';
 import WorkspaceService from '../../../services/WorkspaceService';
-import { WorkspaceDTO } from '../../../types/workspaceTypes';
+import { WorkspaceDTO } from '../../types/workspaceTypes';
 
 export default function MainSidebar() {
   const { account, isAuthenticated, token, logout } = useContext(AuthContext);
@@ -144,14 +144,14 @@ export default function MainSidebar() {
                 }
               </div>
               {
-                  selectedTeam && selectedTeam.name && (
-                    <button
-                      type="button"
-                      onClick={() => setIsCreateWorkspaceFormOpen(true)}
-                      className="new-workspace-button button-pattern-measures"
-                    ><Plus size={30} /> Novo Workspace</button>
-                  )
-                }
+                selectedTeam && selectedTeam.name && (
+                  <button
+                    type="button"
+                    onClick={() => setIsCreateWorkspaceFormOpen(true)}
+                    className="new-workspace-button button-pattern-measures"
+                  ><Plus size={30} /> Novo Workspace</button>
+                )
+              }
             </div>
           )
         }

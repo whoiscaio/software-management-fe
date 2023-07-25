@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IFormError } from '../types/formError';
+import { IFormError } from '../global/types/formError';
 
 export default function useFormErrors() {
   const [errors, setErrors] = useState<IFormError[]>([]);

@@ -1,5 +1,5 @@
 import { Edit, Plus, Trash } from 'lucide-react';
-import { IPhase, IProcess, ProcessDTO, SubprocessDTO } from '../../../types/mainTypes';
+import { IPhase, IProcess, ProcessDTO, SubprocessDTO } from '../../../global/types/mainTypes';
 import Subprocess from './Subprocess';
 import { MouseEvent, useContext, useMemo, useState } from 'react';
 import { ProcessContainer } from '../styles';
