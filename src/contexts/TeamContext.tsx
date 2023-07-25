@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { ITeam, ISimpleTeam } from '../types/teamTypes';
 import { toast } from 'react-toastify';
 import TeamService from '../services/TeamService';
@@ -28,6 +28,7 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
 
   const [teams, setTeams] = useState<ISimpleTeam[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<ITeam>({} as ITeam);
+  const [newTeamAdded, setNewTeamAdded] = useState<boolean>(false);
 
   function reset() {
     setTeams([]);
@@ -44,9 +45,11 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
     setTeams((prevState) => ([
       ...prevState, team
     ]));
+
+    setNewTeamAdded(true);
   }
 
-  async function selectTeam(teamId: string) {
+  const selectTeam = useCallback(async (teamId: string) => {
     const team = teams.find((currentTeam) => currentTeam.id === teamId);
 
     if (!team) {
@@ -59,7 +62,16 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
     if (!response) return;
 
     setSelectedTeam(response.data);
-  }
+  }, [teams, token]);
+
+  useEffect(() => {
+    if (teams.length < 1) return;
+
+    if (newTeamAdded) {
+      selectTeam(teams[teams.length - 1].id);
+      setNewTeamAdded(false);
+    }
+  }, [teams, newTeamAdded, selectTeam]);
 
   const contextData: TeamContextData = {
     teams,
