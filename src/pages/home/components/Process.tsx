@@ -1,16 +1,22 @@
 import { Edit, Trash } from 'lucide-react';
 import { IProcess } from '../../../types/mainTypes';
 import Subprocess from './Subprocess';
-import { MouseEvent, useMemo, useState } from 'react';
+import { MouseEvent, useContext, useMemo, useState } from 'react';
 import { ProcessContainer } from '../styles';
 import Dialog from '../../../global/components/dialogs/Dialog';
 import FormModal from '../../../global/components/dialogs/FormModal';
+import ProcessService from '../../../services/ProcessService';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 
 type ProcessProps = {
   process: IProcess;
 };
 
 export default function Process({ process }: ProcessProps) {
+  const { token } = useContext(AuthContext);
+  const { update } = useContext(WorkspaceContext);
+
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [isSubprocessListOpen, setIsSubprocessListOpen] = useState<boolean>(false);
   const [isEditFormOpen, setIsEditFormOpen] = useState<boolean>(false);
@@ -31,16 +37,16 @@ export default function Process({ process }: ProcessProps) {
     setIsEditFormOpen(true);
   }
 
-  async function handleEditProcess(name: string, description?: string) {
+  async function handleDeleteProcess() {
+    await ProcessService.delete(process.id, token);
+
+    update();
+  }
+
+  async function handleEditProcess() {
     console.log('HANDLE EDIT PROCESS');
 
     setIsEditFormOpen(false);
-  }
-
-  function handleDeleteProcess() {
-    console.log('HANDLE DELETE PROCESS');
-
-    setIsDeleteDialogOpen(false);
   }
 
   const openSize = useMemo(() => (

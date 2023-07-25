@@ -11,6 +11,7 @@ interface WorkspaceContextData {
   selectedWorkspace: IWorkspace,
   selectWorkspace: (workspaceId: string) => Promise<void>;
   addNewWorkspace: (workspace: ISimpleWorkspace) => void;
+  update: () => void;
   reset: () => void;
 }
 
@@ -20,6 +21,7 @@ export const WorkspaceContext = createContext<WorkspaceContextData>({
   selectedWorkspace: {} as IWorkspace,
   selectWorkspace: async () => {},
   addNewWorkspace: () => {},
+  update: () => {},
   reset: () => {}
 });
 
@@ -29,6 +31,10 @@ export default function WorkspaceContextProvider({ children }: { children: React
   const [workspaces, setWorkspaces] = useState<ISimpleWorkspace[]>([]);
   const [selectedWorkspace, setSelectedWorkspace] = useState<IWorkspace>({} as IWorkspace);
   const [newWorkspaceAdded, setNewWorkspaceAdded] = useState<boolean>(false);
+
+  function update() {
+    selectWorkspace(selectedWorkspace.id);
+  }
 
   function reset() {
     setWorkspaces([]);
@@ -75,6 +81,7 @@ export default function WorkspaceContextProvider({ children }: { children: React
     selectedWorkspace,
     selectWorkspace,
     addNewWorkspace,
+    update,
     reset
   };
 

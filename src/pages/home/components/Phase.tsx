@@ -1,16 +1,22 @@
 import { Edit, Plus, X } from 'lucide-react';
 import { IPhase } from '../../../types/mainTypes';
 import Process from './Process';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { PhaseContainer } from '../styles';
 import Dialog from '../../../global/components/dialogs/Dialog';
 import FormModal from '../../../global/components/dialogs/FormModal';
+import PhaseService from '../../../services/PhaseService';
+import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 type PhaseProps = {
   phase: IPhase;
 };
 
 export default function Phase({ phase }: PhaseProps) {
+  const { token } = useContext(AuthContext);
+  const { update } = useContext(WorkspaceContext);
+
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [isEditPhaseFormOpen, setIsEditPhaseFormOpen] = useState<boolean>(false);
   const [isCreateProcessFormOpen, setIsCreateProcessFormOpen] = useState<boolean>(false);
@@ -21,10 +27,10 @@ export default function Phase({ phase }: PhaseProps) {
     setIsEditPhaseFormOpen(false);
   }
 
-  function handleDeletePhase() {
-    console.log('HANDLE DELETE PHASE');
+  async function handleDeletePhase() {
+    await PhaseService.delete(phase.id, token);
 
-    setIsDeleteDialogOpen(false);
+    update();
   }
 
   async function handleCreateProcess(name: string, description?: string) {

@@ -35,4 +35,16 @@ export class HttpClient {
       return error as AxiosError<IApiError>;
     }
   }
+
+  async delete(id: string, token?: string) {
+    try {
+      await axios.delete(`${this.baseURL}/${id}`, {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : undefined
+        }
+      });
+    } catch (error) {
+      return error as AxiosError<IApiError>;
+    }
+  }
 }

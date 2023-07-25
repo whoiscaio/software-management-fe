@@ -1,14 +1,20 @@
 import { Edit, Trash } from 'lucide-react';
 import { ISubprocess } from '../../../types/mainTypes';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Dialog from '../../../global/components/dialogs/Dialog';
 import FormModal from '../../../global/components/dialogs/FormModal';
+import SubprocessService from '../../../services/SubprocessService';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 
 type SubprocessProps = {
   subprocess: ISubprocess;
 };
 
 export default function Subprocess({ subprocess }: SubprocessProps) {
+  const { token } = useContext(AuthContext);
+  const { update } = useContext(WorkspaceContext);
+
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [isEditFormOpen, setIsEditFormOpen] = useState<boolean>(false);
 
@@ -20,10 +26,10 @@ export default function Subprocess({ subprocess }: SubprocessProps) {
     setIsEditFormOpen(false);
   }
 
-  function handleDeleteSubprocess() {
-    console.log('HANDLE DELETE SUBPROCESS');
-
+  async function handleDeleteSubprocess() {
+    await SubprocessService.delete(subprocess.id, token);
     setIsDeleteDialogOpen(false);
+    update();
   }
 
   return (
