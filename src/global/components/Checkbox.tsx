@@ -1,7 +1,9 @@
+import { MouseEvent } from 'react';
 import { styled } from 'styled-components';
 
 type CheckboxProps = {
   checked: boolean;
+  action: (e: MouseEvent) => void;
 };
 
 const CheckboxContainer = styled.div`
@@ -67,9 +69,9 @@ const CheckboxContainer = styled.div`
   }
 `;
 
-export default function Checkbox({ checked }: CheckboxProps) {
+export default function Checkbox({ checked, action }: CheckboxProps) {
   return (
-    <CheckboxContainer className="container">
+    <CheckboxContainer className="container" onClick={action}>
       <input type="checkbox" checked={checked} />
       <span className="checkmark"></span>
     </CheckboxContainer>

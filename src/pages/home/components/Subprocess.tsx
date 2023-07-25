@@ -1,6 +1,6 @@
 import { Edit, Trash } from 'lucide-react';
 import { ISubprocess, SubprocessDTO } from '../../../types/mainTypes';
-import { useContext, useState } from 'react';
+import { MouseEvent, useContext, useState } from 'react';
 import Dialog from '../../../global/components/dialogs/Dialog';
 import FormModal from '../../../global/components/dialogs/FormModal';
 import SubprocessService from '../../../services/SubprocessService';
@@ -20,12 +20,23 @@ export default function Subprocess({ subprocess, processId }: SubprocessProps) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [isEditFormOpen, setIsEditFormOpen] = useState<boolean>(false);
 
-  async function handleEditSubprocess(name: string, description?: string) {
+  function handleToggleSubprocessState(e: MouseEvent) {
+    e.stopPropagation();
+
+    handleEditSubprocess(
+      subprocess.name,
+      subprocess.description,
+      processId,
+      true,
+    );
+  }
+
+  async function handleEditSubprocess(name: string, description?: string, newProcessId?: string, toggleState?: boolean) {
     const body: SubprocessDTO = {
       name,
       description: description || '',
-      process_id: processId,
-      concluded: subprocess.concluded
+      process_id: newProcessId || processId,
+      concluded: toggleState ? !subprocess.concluded : subprocess.concluded,
     };
 
     await SubprocessService.update(subprocess.id, body, token);
@@ -44,7 +55,7 @@ export default function Subprocess({ subprocess, processId }: SubprocessProps) {
     <>
       <div className="subprocess-button">
         <div className="main-process process-item">
-          <Checkbox checked={subprocess.concluded} />
+          <Checkbox checked={subprocess.concluded} action={handleToggleSubprocessState} />
           <p>{subprocess.name}</p>
           <div className="actions">
             <button type="button" onClick={() => setIsDeleteDialogOpen(true)}><Trash color="#DD0000" size={25} /></button>

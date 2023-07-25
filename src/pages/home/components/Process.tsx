@@ -60,12 +60,23 @@ export default function Process({ process, phaseId, phases }: ProcessProps) {
     update();
   }
 
-  async function handleEditProcess(name: string, description?: string, newPhaseId?: string) {
+  function handleToggleProcessState(e: MouseEvent) {
+    e.stopPropagation();
+
+    handleEditProcess(
+      process.name,
+      process.description,
+      phaseId,
+      true
+    );
+  }
+
+  async function handleEditProcess(name: string, description?: string, newPhaseId?: string, toggleState?: boolean) {
     const body: ProcessDTO = {
       name,
       description: description || '',
       phase_id: newPhaseId || phaseId,
-      concluded: process.concluded
+      concluded: toggleState ? !process.concluded : process.concluded
     };
 
     await ProcessService.update(process.id, body, token);
@@ -82,7 +93,7 @@ export default function Process({ process, phaseId, phases }: ProcessProps) {
     <>
       <ProcessContainer className={`process-button ${isSubprocessListOpen ? 'open' : ''}`} openSize={openSize}>
         <div className="main-process process-item" onClick={handleToggleSubprocessList}>
-          <Checkbox checked={process.concluded} />
+          <Checkbox action={handleToggleProcessState} checked={process.concluded} />
           <p>{process.name}</p>
           <div className="actions">
             <button type="button" onClick={handleOpenDeleteDialog}><Trash color="#DD0000" size={25} /></button>
