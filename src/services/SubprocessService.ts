@@ -2,12 +2,24 @@ import { AxiosError } from 'axios';
 import { HttpClient } from './utils/HttpClient';
 import handleEmitError from '../global/utils/handleEmitError';
 import { toast } from 'react-toastify';
+import { SubprocessDTO } from '../types/mainTypes';
 
 class SubprocessService {
   private httpClient: HttpClient;
 
   constructor() {
     this.httpClient = new HttpClient('/subprocesses');
+  }
+
+  async update(id: string, subprocessDTO: SubprocessDTO, token: string) {
+    const response = await this.httpClient.put(id, subprocessDTO, token);
+
+    if (response instanceof AxiosError) {
+      handleEmitError(response.response?.data.message);
+      return;
+    }
+
+    return;
   }
 
   async delete(id: string, token: string) {

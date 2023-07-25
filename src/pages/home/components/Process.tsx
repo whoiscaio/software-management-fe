@@ -88,7 +88,7 @@ export default function Process({ process, phaseId, phases, concluded }: Process
               <div className="subprocess-list">
                 {
                   process.subprocesses.map((subprocess) => (
-                    <Subprocess subprocess={subprocess} />
+                    <Subprocess subprocess={subprocess} processId={process.id} />
                   ))
                 }
               </div>
