@@ -1,5 +1,5 @@
 import { Edit, Trash } from 'lucide-react';
-import { IProcess, ProcessDTO } from '../../../types/mainTypes';
+import { IPhase, IProcess, ProcessDTO } from '../../../types/mainTypes';
 import Subprocess from './Subprocess';
 import { MouseEvent, useContext, useMemo, useState } from 'react';
 import { ProcessContainer } from '../styles';
@@ -12,9 +12,11 @@ import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 type ProcessProps = {
   process: IProcess;
   phaseId: string;
+  phases: IPhase[];
+  concluded: boolean;
 };
 
-export default function Process({ process, phaseId }: ProcessProps) {
+export default function Process({ process, phaseId, phases, concluded }: ProcessProps) {
   const { token } = useContext(AuthContext);
   const { update } = useContext(WorkspaceContext);
 
@@ -44,11 +46,11 @@ export default function Process({ process, phaseId }: ProcessProps) {
     update();
   }
 
-  async function handleEditProcess(name: string, description?: string) {
+  async function handleEditProcess(name: string, description?: string, newPhaseId?: string) {
     const body: ProcessDTO = {
       name,
       description: description || '',
-      phase_id: phaseId
+      phase_id: newPhaseId || phaseId
     };
 
     await ProcessService.update(process.id, body, token);
@@ -65,7 +67,15 @@ export default function Process({ process, phaseId }: ProcessProps) {
     <>
       <ProcessContainer className={`process-button ${isSubprocessListOpen ? 'open' : ''}`} openSize={openSize}>
         <div className="main-process process-item" onClick={handleToggleSubprocessList}>
-          <div className="tag button-pattern-measures contrast-button">Em andamento</div>
+          {
+            concluded
+              ? (
+                <div className="tag concluded button-pattern-measures contrast-button">Concluída</div>
+              )
+              : (
+                <div className="tag button-pattern-measures contrast-button">Em andamento</div>
+              )
+          }
           <p>{process.name}</p>
           <div className="actions">
             <button type="button" onClick={handleOpenDeleteDialog}><Trash color="#DD0000" size={25} /></button>
@@ -106,6 +116,8 @@ export default function Process({ process, phaseId }: ProcessProps) {
             confirmButtonText="Editar processo"
             text1={process.name}
             text2={process.description}
+            options={phases}
+            defaultOption={phases.find((phase) => phase.id === phaseId)}
           />
         )
       }

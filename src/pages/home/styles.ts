@@ -178,6 +178,10 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
     color: ${({ theme }) => theme.colors.white};
 
     box-shadow: 0;
+
+    &.concluded {
+      background-color: #007722;
+    }
   }
 
   .actions {

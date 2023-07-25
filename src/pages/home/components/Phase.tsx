@@ -12,9 +12,10 @@ import ProcessService from '../../../services/ProcessService';
 
 type PhaseProps = {
   phase: IPhase;
+  phases: IPhase[];
 };
 
-export default function Phase({ phase }: PhaseProps) {
+export default function Phase({ phase, phases }: PhaseProps) {
   const { token } = useContext(AuthContext);
   const { selectedWorkspace, update } = useContext(WorkspaceContext);
 
@@ -70,7 +71,7 @@ export default function Phase({ phase }: PhaseProps) {
             phase.processes &&
             phase.processes.length > 0
               ? phase.processes?.map((process) => (
-                <Process key={process.id} phaseId={phase.id} process={process} />
+                <Process key={process.id} phaseId={phase.id} phases={phases} process={process} concluded={phase.name === 'Concluídos'} />
               ))
               : (
                   <p>Essa fase não possui nenhum processo.</p>

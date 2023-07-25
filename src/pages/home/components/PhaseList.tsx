@@ -10,8 +10,8 @@ export default function PhaseList() {
     <PhaseListContainer>
       {
         selectedWorkspace?.phases?.sort((a, b) => a.order - b.order).map((phase) => (
-      <Phase key={phase.id} phase={phase} />
-      ))
+          <Phase key={phase.id} phase={phase} phases={selectedWorkspace.phases} />
+        ))
       }
     </PhaseListContainer>
   );

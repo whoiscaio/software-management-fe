@@ -105,6 +105,67 @@ const GlobalStyles = createGlobalStyle`
   main .app-context {
     margin: 2rem 0;
   }
+
+  .custom-select {
+    background: ${({ theme }) => theme.colors.white};
+    border-radius: .4rem;
+
+    &.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .select-trigger {
+      display: flex;
+      justify-content: space-between;
+
+      position: relative;
+
+      .select-options {
+        background: ${({ theme }) => theme.colors.white};
+        border-bottom-left-radius: .4rem;
+        border-bottom-right-radius: .4rem;
+
+        position: absolute;
+
+        width: 100%;
+        left: 0;
+        top: 100%;
+      }
+    }
+
+    .option {
+      &:last-of-type {
+        border-bottom-left-radius: .4rem;
+        border-bottom-right-radius: .4rem;
+      }
+
+      &:hover {
+        background: ${({ theme }) => theme.colors.gray};
+      }
+    }
+
+    .select-trigger, .option {
+      padding: 1rem;
+
+      &, * {
+        cursor: pointer;
+      }
+    }
+
+    > div {
+      font-size: 1.2rem;
+      font-weight: 700;
+
+      svg {
+        color: ${({ theme }) => theme.colors.main};
+      }
+
+      p {
+        color: ${({ theme }) => theme.colors.main};
+      }
+    }
+  }
 `;
 
 export default GlobalStyles;

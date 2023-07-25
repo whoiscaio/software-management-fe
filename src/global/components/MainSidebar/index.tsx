@@ -106,7 +106,7 @@ export default function MainSidebar() {
               </button>
               {
                 teams && teams.length > 0 && (
-                  <div className={`select-team ${isSelectMenuOpen ? 'open' : ''}`}>
+                  <div className={`custom-select ${isSelectMenuOpen ? 'open' : ''}`}>
                     <div
                       className="select-trigger"
                       ref={selectTrigger}
