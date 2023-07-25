@@ -1,5 +1,5 @@
 import { Edit, Plus, Trash } from 'lucide-react';
-import { IPhase, IProcess, ProcessDTO } from '../../../types/mainTypes';
+import { IPhase, IProcess, ProcessDTO, SubprocessDTO } from '../../../types/mainTypes';
 import Subprocess from './Subprocess';
 import { MouseEvent, useContext, useMemo, useState } from 'react';
 import { ProcessContainer } from '../styles';
@@ -8,6 +8,7 @@ import FormModal from '../../../global/components/dialogs/FormModal';
 import ProcessService from '../../../services/ProcessService';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
+import SubprocessService from '../../../services/SubprocessService';
 
 type ProcessProps = {
   process: IProcess;
@@ -23,6 +24,7 @@ export default function Process({ process, phaseId, phases, concluded }: Process
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [isSubprocessListOpen, setIsSubprocessListOpen] = useState<boolean>(false);
   const [isEditFormOpen, setIsEditFormOpen] = useState<boolean>(false);
+  const [isCreateSubprocessFormOpen, setIsCreateSubprocessFormOpen] = useState<boolean>(false);
 
   function handleToggleSubprocessList() {
     setIsSubprocessListOpen((prevState) => !prevState);
@@ -36,6 +38,19 @@ export default function Process({ process, phaseId, phases, concluded }: Process
   function handleOpenEditForm(e: MouseEvent) {
     e.stopPropagation();
     setIsEditFormOpen(true);
+  }
+
+  async function handleCreateSubprocess(name: string, description?: string) {
+    const body: SubprocessDTO = {
+      name,
+      description: description || '',
+      process_id: process.id
+    };
+
+    await SubprocessService.create(body, token);
+
+    setIsCreateSubprocessFormOpen(false);
+    update();
   }
 
   async function handleDeleteProcess() {
@@ -89,7 +104,11 @@ export default function Process({ process, phaseId, phases, concluded }: Process
             }
           </div>
           <div className="subprocess-action">
-            <button type="button" className="button-pattern-measures contrast-button scale-down-hover-effect"><Plus /> Novo subprocesso</button>
+            <button
+              type="button"
+              onClick={() => setIsCreateSubprocessFormOpen(true)}
+              className="button-pattern-measures contrast-button scale-down-hover-effect"
+            ><Plus /> Novo subprocesso</button>
           </div>
         </div>
       </ProcessContainer>
@@ -115,6 +134,16 @@ export default function Process({ process, phaseId, phases, concluded }: Process
             text2={process.description}
             options={phases}
             defaultOption={phases.find((phase) => phase.id === phaseId)}
+          />
+        )
+      }
+      {
+        isCreateSubprocessFormOpen && (
+          <FormModal
+            action={handleCreateSubprocess}
+            close={() => setIsCreateSubprocessFormOpen(false)}
+            title="Criar subprocesso"
+            confirmButtonText="Criar subprocesso"
           />
         )
       }

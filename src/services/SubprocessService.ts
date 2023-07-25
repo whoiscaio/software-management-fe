@@ -11,6 +11,17 @@ class SubprocessService {
     this.httpClient = new HttpClient('/subprocesses');
   }
 
+  async create(subprocessDTO: SubprocessDTO, token: string) {
+    const response = await this.httpClient.post('', subprocessDTO, token);
+
+    if (response instanceof AxiosError) {
+      handleEmitError(response.response?.data.message);
+      return;
+    }
+
+    return;
+  }
+
   async update(id: string, subprocessDTO: SubprocessDTO, token: string) {
     const response = await this.httpClient.put(id, subprocessDTO, token);
 
