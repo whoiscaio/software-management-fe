@@ -46,7 +46,8 @@ export default function Phase({ phase, phases }: PhaseProps) {
     const body: ProcessDTO = {
       name,
       description: description || '',
-      phase_id: phase.id
+      phase_id: phase.id,
+      concluded: false
     };
 
     await ProcessService.create(body, token);
@@ -71,7 +72,7 @@ export default function Phase({ phase, phases }: PhaseProps) {
             phase.processes &&
             phase.processes.length > 0
               ? phase.processes?.map((process) => (
-                <Process key={process.id} phaseId={phase.id} phases={phases} process={process} concluded={phase.name === 'Concluídos'} />
+                <Process key={process.id} phaseId={phase.id} phases={phases} process={process} />
               ))
               : (
                   <p>Essa fase não possui nenhum processo.</p>

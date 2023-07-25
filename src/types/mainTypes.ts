@@ -2,12 +2,14 @@ export interface SubprocessDTO {
   name: string;
   description: string;
   process_id: string;
+  concluded: boolean;
 }
 
 export interface ProcessDTO {
   name: string;
   description: string;
   phase_id: string;
+  concluded: boolean;
 }
 
 export interface PhaseDTO {
@@ -20,6 +22,7 @@ export interface ISubprocess {
   id: string;
   name: string;
   description: string;
+  concluded: boolean;
 }
 
 export interface IProcess extends ISubprocess {

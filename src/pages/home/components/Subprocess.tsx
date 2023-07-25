@@ -23,7 +23,8 @@ export default function Subprocess({ subprocess, processId }: SubprocessProps) {
     const body: SubprocessDTO = {
       name,
       description: description || '',
-      process_id: processId
+      process_id: processId,
+      concluded: subprocess.concluded
     };
 
     await SubprocessService.update(subprocess.id, body, token);

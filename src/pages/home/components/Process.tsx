@@ -14,10 +14,9 @@ type ProcessProps = {
   process: IProcess;
   phaseId: string;
   phases: IPhase[];
-  concluded: boolean;
 };
 
-export default function Process({ process, phaseId, phases, concluded }: ProcessProps) {
+export default function Process({ process, phaseId, phases }: ProcessProps) {
   const { token } = useContext(AuthContext);
   const { update } = useContext(WorkspaceContext);
 
@@ -44,7 +43,8 @@ export default function Process({ process, phaseId, phases, concluded }: Process
     const body: SubprocessDTO = {
       name,
       description: description || '',
-      process_id: process.id
+      process_id: process.id,
+      concluded: process.concluded
     };
 
     await SubprocessService.create(body, token);
@@ -63,7 +63,8 @@ export default function Process({ process, phaseId, phases, concluded }: Process
     const body: ProcessDTO = {
       name,
       description: description || '',
-      phase_id: newPhaseId || phaseId
+      phase_id: newPhaseId || phaseId,
+      concluded: process.concluded
     };
 
     await ProcessService.update(process.id, body, token);
@@ -81,7 +82,7 @@ export default function Process({ process, phaseId, phases, concluded }: Process
       <ProcessContainer className={`process-button ${isSubprocessListOpen ? 'open' : ''}`} openSize={openSize}>
         <div className="main-process process-item" onClick={handleToggleSubprocessList}>
           {
-            concluded
+            process.concluded
               ? (
                 <div className="tag concluded button-pattern-measures contrast-button">Concluída</div>
               )
