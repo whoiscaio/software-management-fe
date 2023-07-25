@@ -22,9 +22,13 @@ export class HttpClient {
     }
   }
 
-  async post(uri: string, body: any) {
+  async post(uri: string, body: any, token?: string) {
     try {
-      const response = await axios.post(`${this.baseURL}${uri}`, body);
+      const response = await axios.post(`${this.baseURL}${uri}`, body, {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : undefined
+        }
+      });
 
       return response;
     } catch (error) {

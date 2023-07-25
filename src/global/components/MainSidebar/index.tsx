@@ -7,10 +7,13 @@ import { WorkspaceContext } from '../../../contexts/WorkspaceContext';
 import { TeamContext } from '../../../contexts/TeamContext';
 import Logo from '../Logo';
 import FormModal from '../dialogs/FormModal';
+import TeamService from '../../../services/TeamService';
+import { TeamDTO } from '../../../types/teamTypes';
+import { toast } from 'react-toastify';
 
 export default function MainSidebar() {
-  const { account, isAuthenticated, logout } = useContext(AuthContext);
-  const { selectedTeam, selectTeam, reset: teamReset } = useContext(TeamContext);
+  const { account, isAuthenticated, token, logout } = useContext(AuthContext);
+  const { teams, selectedTeam, selectTeam, addNewTeam, reset: teamReset } = useContext(TeamContext);
   const { workspaces, selectedWorkspace, handleSetWorkspaces, selectWorkspace, reset: workspaceReset } = useContext(WorkspaceContext);
 
   const selectTrigger = useRef<HTMLDivElement>(null);
@@ -40,7 +43,17 @@ export default function MainSidebar() {
   }
 
   async function handleCreateTeam(name: string, description?: string) {
-    console.log('HANDLE CREATE TEAM');
+    const body: TeamDTO = {
+      name, description: description || ''
+    };
+
+    const response = await TeamService.createTeam(body, token);
+
+    if (!response?.data) return;
+
+    addNewTeam(response.data);
+
+    toast(`Time ${name} criado com sucesso.`);
 
     setIsCreateTeamFormOpen(false);
   }
@@ -78,7 +91,7 @@ export default function MainSidebar() {
                 <Plus /> <span>Novo Time</span>
               </button>
               {
-                account.teams && account.teams.length > 0 && (
+                teams && teams.length > 0 && (
                   <div className={`select-team ${isSelectMenuOpen ? 'open' : ''}`}>
                     <div
                       className="select-trigger"
@@ -91,7 +104,7 @@ export default function MainSidebar() {
                         isSelectMenuOpen && (
                           <div className="select-options">
                             {
-                              account.teams.map((team) => (
+                              teams.map((team) => (
                                 <div className="option" key={team.id} onClick={(e) => handleSelectTeam(e, team.id)}>
                                   <p>{team.name}</p>
                                 </div>

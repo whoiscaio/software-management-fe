@@ -10,15 +10,17 @@ interface TeamContextData {
   handleSetTeams: (teams: ISimpleTeam[]) => void;
   selectedTeam: ITeam;
   selectTeam: (teamId: string) => Promise<void>;
+  addNewTeam: (team: ISimpleTeam) => void;
   reset: () => void;
 }
 
 export const TeamContext = createContext<TeamContextData>({
   teams: [],
-  handleSetTeams: () => { },
+  handleSetTeams: () => {},
   selectedTeam: {} as ITeam,
-  selectTeam: async () => { },
-  reset: () => { },
+  selectTeam: async () => {},
+  addNewTeam: () => {},
+  reset: () => {},
 });
 
 export default function TeamContextProvider({ children }: { children: ReactNode; }) {
@@ -36,6 +38,12 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
     if (teams.length < 1) return;
 
     setTeams(teams);
+  }
+
+  function addNewTeam(team: ISimpleTeam) {
+    setTeams((prevState) => ([
+      ...prevState, team
+    ]));
   }
 
   async function selectTeam(teamId: string) {
@@ -58,6 +66,7 @@ export default function TeamContextProvider({ children }: { children: ReactNode;
     handleSetTeams,
     selectedTeam,
     selectTeam,
+    addNewTeam,
     reset
   };
 

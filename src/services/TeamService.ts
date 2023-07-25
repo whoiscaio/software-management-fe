@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import handleEmitError from '../global/utils/handleEmitError';
 import { HttpClient } from './utils/HttpClient';
-import { ITeam } from '../types/teamTypes';
+import { ITeam, TeamDTO } from '../types/teamTypes';
 
 class TeamService {
   private httpClient: HttpClient;
@@ -18,6 +18,18 @@ class TeamService {
     if (response instanceof AxiosError) {
       handleEmitError(response.response?.data.message);
       return;
+    }
+
+    return response as AxiosResponse<ITeam>;
+  }
+
+  async createTeam(team: TeamDTO, token: string) {
+    if (!token) return;
+
+    const response = await this.httpClient.post('', team, token);
+
+    if (response instanceof AxiosError) {
+      handleEmitError(response.response?.data.message);
     }
 
     return response as AxiosResponse<ITeam>;
