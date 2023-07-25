@@ -165,6 +165,14 @@ export const ProcessContainer = styled.div<ProcessContainerProps>`
       justify-content: flex-end;
 
       margin: 0 3rem;
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 1rem;
+      }
     }
   }
 
