@@ -37,6 +37,8 @@ export default function MainSidebar() {
   }
 
   function handleSelectTeam(e: ReactMouseEvent<HTMLDivElement>, teamId: string) {
+    if (selectedTeam.id === teamId) return;
+
     e.stopPropagation();
 
     workspaceReset();
