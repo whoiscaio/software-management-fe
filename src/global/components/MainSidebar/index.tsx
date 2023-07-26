@@ -30,6 +30,12 @@ export default function MainSidebar() {
     logout();
   }
 
+  function handleSelectWorkspace(workspaceId: string) {
+    if (selectedWorkspace.id === workspaceId) return;
+
+    selectWorkspace(workspaceId);
+  }
+
   function handleSelectTeam(e: ReactMouseEvent<HTMLDivElement>, teamId: string) {
     e.stopPropagation();
 
@@ -138,7 +144,7 @@ export default function MainSidebar() {
                       key={workspace.id}
                       type="button"
                       className={`button-pattern-measures ${selectedWorkspace.id === workspace.id ? 'selected' : ''}`}
-                      onClick={() => selectWorkspace(workspace.id)}
+                      onClick={() => handleSelectWorkspace(workspace.id)}
                     >{workspace.name}</button>
                   ))
                 }
