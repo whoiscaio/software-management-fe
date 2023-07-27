@@ -20,6 +20,18 @@ export default function Subprocess({ subprocess, processId }: SubprocessProps) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
   const [isEditFormOpen, setIsEditFormOpen] = useState<boolean>(false);
 
+  function handleOpenDeleteDialog(e: MouseEvent) {
+    e.stopPropagation();
+
+    setIsDeleteDialogOpen(true);
+  }
+
+  function handleOpenEditForm(e: MouseEvent) {
+    e.stopPropagation();
+
+    setIsDeleteDialogOpen(true);
+  }
+
   function handleToggleSubprocessState(e: MouseEvent) {
     e.stopPropagation();
 
@@ -58,8 +70,8 @@ export default function Subprocess({ subprocess, processId }: SubprocessProps) {
           <Checkbox checked={subprocess.concluded} />
           <p>{subprocess.name}</p>
           <div className="actions">
-            <button type="button" onClick={() => setIsDeleteDialogOpen(true)}><Trash color="#DD0000" size={25} /></button>
-            <button type="button" onClick={() => setIsEditFormOpen(true)}><Edit color="#0000BB" size={25} /></button>
+            <button type="button" onClick={handleOpenDeleteDialog}><Trash color="#DD0000" size={25} /></button>
+            <button type="button" onClick={handleOpenEditForm}><Edit color="#0000BB" size={25} /></button>
           </div>
         </div>
       </div>
